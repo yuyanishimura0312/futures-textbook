@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来を拓く力 — フューチャーズ・スタディーズ入門</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8B6914;
+            --color-primary-light: #A07D2A;
+            --color-secondary: #D4A84B;
+            --color-accent: #5C7C3A;
+            --color-bg: #F8F5F0;
+            --color-bg-alt: #F0EBE3;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-text-muted: #999999;
+            --color-border: #D4CBC0;
+            --color-link: #8B6914;
+            --font-body: 'Noto Serif JP', 'Georgia', serif;
+            --font-heading: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #1A1814;
+            --color-bg-alt: #242018;
+            --color-text: #E8E0D4;
+            --color-text-light: #B8AE9E;
+            --color-text-muted: #7A7060;
+            --color-border: #3A342A;
+            --color-primary: #D4A84B;
+            --color-link: #D4A84B;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { font-size: 16px; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .site-header {
+            border-bottom: 1px solid var(--color-border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .site-header__left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-header__logo { height: 36px; width: auto; }
+
+        .site-header__title {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .hero {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+
+        .hero__logo {
+            height: 64px;
+            margin-bottom: 24px;
+        }
+
+        .hero__title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .hero__subtitle {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 8px;
+        }
+
+        .hero__meta {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 16px;
+        }
+
+        .toc {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px 120px;
+        }
+
+        .toc__part {
+            margin-bottom: 40px;
+        }
+
+        .toc__part-title {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .toc__part-subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+
+        .toc__chapter-list {
+            list-style: none;
+        }
+
+        .toc__chapter {
+            margin-bottom: 12px;
+        }
+
+        .toc__chapter a {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--color-text);
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.15s;
+        }
+
+        .toc__chapter a:hover {
+            background: var(--color-bg-alt);
+        }
+
+        .toc__chapter-num {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            min-width: 36px;
+        }
+
+        .toc__chapter-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .toc__chapter-subtitle {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-left: 4px;
+        }
+
+        .toc__chapter--draft .toc__chapter-title {
+            color: var(--color-text-muted);
+        }
+
+        .toc__chapter--draft .toc__chapter-subtitle {
+            color: var(--color-text-muted);
+        }
+
+        .toc__status {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .toc__status--done {
+            background: #5C7C3A22;
+            color: var(--color-accent);
+        }
+
+        .toc__status--draft {
+            background: #D4CBC044;
+            color: var(--color-text-muted);
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 24px;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        @media print {
+            .site-header, .site-footer, .theme-toggle { display: none; }
+            .hero { padding: 40px 0 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .hero__title { font-size: 1.6rem; }
+            .site-header { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="site-header__left">
+        <img src="assets/miratuku-logo.png" alt="NPO法人ミラツク" class="site-header__logo">
+        <span class="site-header__title">未来を拓く力</span>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">明/暗</button>
+</header>
+
+<section class="hero">
+    <img src="assets/miratuku-logo.png" alt="" class="hero__logo">
+    <h1 class="hero__title">未来を拓く力</h1>
+    <p class="hero__subtitle">フューチャーズ・スタディーズ入門</p>
+    <p class="hero__subtitle" style="font-size: 0.85rem;">ビジネスパーソンと実践者のための未来学</p>
+    <p class="hero__meta">NPO法人ミラツク 編</p>
+</section>
+
+<nav class="toc">
+
+    <!-- Part I -->
+    <div class="toc__part">
+        <div class="toc__part-title">Part I</div>
+        <h2 class="toc__part-subtitle">未来学とは何か</h2>
+        <ul class="toc__chapter-list">
+            <li class="toc__chapter">
+                <a href="chapters/ch01.html">
+                    <span class="toc__chapter-num">第1章</span>
+                    <span class="toc__chapter-title">なぜ未来を考えるのか<span class="toc__chapter-subtitle"> — 不確実な時代の航海術</span></span>
+                    <span class="toc__status toc__status--done">公開</span>
+                </a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#">
+                    <span class="toc__chapter-num">第2章</span>
+                    <span class="toc__chapter-title">未来学の80年<span class="toc__chapter-subtitle"> — RANDから脱植民地的未来まで</span></span>
+                    <span class="toc__status toc__status--draft">執筆中</span>
+                </a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#">
+                    <span class="toc__chapter-num">第3章</span>
+                    <span class="toc__chapter-title">未来学の17学派<span class="toc__chapter-subtitle"> — 世界の知的伝統マップ</span></span>
+                    <span class="toc__status toc__status--draft">執筆中</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Part II -->
+    <div class="toc__part">
+        <div class="toc__part-title">Part II</div>
+        <h2 class="toc__part-subtitle">未来学の認識論</h2>
+        <ul class="toc__chapter-list">
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#">
+                    <span class="toc__chapter-num">第4章</span>
+                    <span class="toc__chapter-title">未来は知りうるか<span class="toc__chapter-subtitle"> — 予測・探求・構築</span></span>
+                    <span class="toc__status toc__status--draft">執筆中</span>
+                </a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#">
+                    <span class="toc__chapter-num">第5章</span>
+                    <span class="toc__chapter-title">可能・蓋然・望ましい未来<span class="toc__chapter-subtitle"> — フューチャーズ・コーン</span></span>
+                    <span class="toc__status toc__status--draft">執筆中</span>
+                </a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#">
+                    <span class="toc__chapter-num">第6章</span>
+                    <span class="toc__chapter-title">不確実性の分類学<span class="toc__chapter-subtitle"> — リスク・不確実性・無知</span></span>
+                    <span class="toc__status toc__status--draft">執筆中</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Part III -->
+    <div class="toc__part">
+        <div class="toc__part-title">Part III</div>
+        <h2 class="toc__part-subtitle">未来学の手法</h2>
+        <ul class="toc__chapter-list">
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第7章</span><span class="toc__chapter-title">環境スキャニングと弱いシグナル</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第8章</span><span class="toc__chapter-title">シナリオプランニング<span class="toc__chapter-subtitle"> — 不確実性と向き合う</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第9章</span><span class="toc__chapter-title">デルファイ法と専門家判断の集約</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第10章</span><span class="toc__chapter-title">因果階層分析（CLA）<span class="toc__chapter-subtitle"> — 深層構造を掘り下げる</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第11章</span><span class="toc__chapter-title">スリーホライズンとバックキャスティング</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第12章</span><span class="toc__chapter-title">デザインフューチャーズと経験的未来</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第13章</span><span class="toc__chapter-title">システム思考とレバレッジポイント</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Part IV -->
+    <div class="toc__part">
+        <div class="toc__part-title">Part IV</div>
+        <h2 class="toc__part-subtitle">未来学の倫理と実践</h2>
+        <ul class="toc__chapter-list">
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第14章</span><span class="toc__chapter-title">将来世代への責任<span class="toc__chapter-subtitle"> — 世代間公正の思想</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第15章</span><span class="toc__chapter-title">企業フォーサイト<span class="toc__chapter-subtitle"> — 組織に未来思考を埋め込む</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第16章</span><span class="toc__chapter-title">政府フォーサイト<span class="toc__chapter-subtitle"> — 公共政策と未来</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第17章</span><span class="toc__chapter-title">参加型未来とコミュニティ・フォーサイト</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Part V -->
+    <div class="toc__part">
+        <div class="toc__part-title">Part V</div>
+        <h2 class="toc__part-subtitle">未来学の最前線</h2>
+        <ul class="toc__chapter-list">
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第18章</span><span class="toc__chapter-title">AIと未来学の未来</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第19章</span><span class="toc__chapter-title">脱植民地的未来と多元的世界</span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+            <li class="toc__chapter toc__chapter--draft">
+                <a href="#"><span class="toc__chapter-num">第20章</span><span class="toc__chapter-title">フューチャーズリテラシー<span class="toc__chapter-subtitle"> — 未来を「使う」力</span></span><span class="toc__status toc__status--draft">執筆中</span></a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<footer class="site-footer">
+    &copy; NPO法人ミラツク（MIRA TUKU）. 未来を拓く力 — フューチャーズ・スタディーズ入門
+</footer>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    }
+    (function() {
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+</script>
+
+</body>
+</html>

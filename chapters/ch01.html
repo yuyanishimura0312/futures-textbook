@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1章: なぜ未来を考えるのか — 不確実な時代の航海術 | 未来を拓く力</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           Miratuku CI Palette — Warm Earth Tones
+           ============================================ */
+        :root {
+            --color-primary: #8B6914;
+            --color-primary-light: #A07D2A;
+            --color-secondary: #D4A84B;
+            --color-accent: #5C7C3A;
+            --color-accent-light: #7A9F56;
+            --color-bg: #F8F5F0;
+            --color-bg-alt: #F0EBE3;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-text-muted: #999999;
+            --color-border: #D4CBC0;
+            --color-link: #8B6914;
+            --color-box-bg: #FAF7F2;
+            --color-box-border: #E8DFD2;
+            --font-body: 'Noto Serif JP', 'Georgia', serif;
+            --font-heading: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+            --max-width: 720px;
+            --line-height: 1.9;
+        }
+
+        /* Dark mode */
+        [data-theme="dark"] {
+            --color-bg: #1A1814;
+            --color-bg-alt: #242018;
+            --color-text: #E8E0D4;
+            --color-text-light: #B8AE9E;
+            --color-text-muted: #7A7060;
+            --color-border: #3A342A;
+            --color-box-bg: #222018;
+            --color-box-border: #3A342A;
+            --color-primary: #D4A84B;
+            --color-primary-light: #E0BC6A;
+            --color-link: #D4A84B;
+        }
+
+        /* ============================================
+           Base
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: var(--line-height);
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ============================================
+           Header
+           ============================================ */
+        .site-header {
+            border-bottom: 1px solid var(--color-border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .site-header__left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-header__logo {
+            height: 36px;
+            width: auto;
+        }
+
+        .site-header__title {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            letter-spacing: 0.05em;
+        }
+
+        .site-header__nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .site-header__nav a {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            text-decoration: none;
+        }
+
+        .site-header__nav a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            transition: border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* ============================================
+           Chapter
+           ============================================ */
+        .chapter {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 60px 24px 120px;
+        }
+
+        .chapter__part-label {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-primary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .chapter__number {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .chapter__title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .chapter__subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            margin-bottom: 40px;
+        }
+
+        .chapter__epigraph {
+            border-left: 3px solid var(--color-secondary);
+            padding: 16px 24px;
+            margin-bottom: 48px;
+            background: var(--color-box-bg);
+        }
+
+        .chapter__epigraph p {
+            font-style: italic;
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .chapter__epigraph cite {
+            display: block;
+            margin-top: 8px;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        /* ============================================
+           Typography
+           ============================================ */
+        .chapter h2 {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin: 56px 0 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--color-secondary);
+        }
+
+        .chapter h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 40px 0 16px;
+        }
+
+        .chapter p {
+            margin-bottom: 20px;
+            text-align: justify;
+            text-indent: 1em;
+        }
+
+        .chapter p.no-indent {
+            text-indent: 0;
+        }
+
+        .chapter a {
+            color: var(--color-link);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .chapter strong {
+            font-weight: 600;
+        }
+
+        .chapter em {
+            font-style: italic;
+        }
+
+        /* ============================================
+           Info Box (column / case study)
+           ============================================ */
+        .info-box {
+            background: var(--color-box-bg);
+            border: 1px solid var(--color-box-border);
+            border-radius: 6px;
+            padding: 24px 28px;
+            margin: 32px 0;
+        }
+
+        .info-box--accent {
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .info-box--primary {
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .info-box__label {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .info-box--primary .info-box__label {
+            color: var(--color-primary);
+        }
+
+        .info-box__title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+            text-indent: 0;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ============================================
+           SVG Diagram
+           ============================================ */
+        .diagram {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram__caption {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 12px;
+        }
+
+        /* ============================================
+           Chapter Footer
+           ============================================ */
+        .chapter__references {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .chapter__references h2 {
+            font-size: 1.1rem;
+            border-bottom: none;
+            margin-top: 0;
+        }
+
+        .chapter__references ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .chapter__references li {
+            font-size: 0.88rem;
+            color: var(--color-text-light);
+            margin-bottom: 8px;
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+
+        .chapter__nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .chapter__nav a {
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .chapter__nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           Comparison Table
+           ============================================ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--color-bg-alt);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--color-primary);
+        }
+
+        .comparison-table td {
+            vertical-align: top;
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 24px;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* ============================================
+           Print Styles (A4 PDF)
+           ============================================ */
+        @media print {
+            @page {
+                size: A4;
+                margin: 25mm 20mm;
+            }
+
+            body {
+                font-size: 10.5pt;
+                color: #000;
+                background: #fff;
+            }
+
+            .site-header,
+            .site-footer,
+            .theme-toggle,
+            .chapter__nav {
+                display: none;
+            }
+
+            .chapter {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .chapter h2 {
+                page-break-after: avoid;
+            }
+
+            .info-box {
+                page-break-inside: avoid;
+            }
+
+            .diagram {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+
+            @top-center {
+                content: "未来を拓く力 — 第1章";
+            }
+
+            @bottom-center {
+                content: counter(page);
+            }
+        }
+
+        /* ============================================
+           Responsive
+           ============================================ */
+        @media (max-width: 600px) {
+            .chapter__title {
+                font-size: 1.5rem;
+            }
+
+            .chapter__subtitle {
+                font-size: 1rem;
+            }
+
+            .site-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="site-header__left">
+        <img src="../assets/miratuku-logo.png" alt="NPO法人ミラツク" class="site-header__logo">
+        <span class="site-header__title">未来を拓く力 — フューチャーズ・スタディーズ入門</span>
+    </div>
+    <nav class="site-header__nav">
+        <a href="../index.html">目次</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切替">明/暗</button>
+    </nav>
+</header>
+
+<!-- Chapter Content -->
+<article class="chapter">
+
+    <div class="chapter__part-label">Part I: 未来学とは何か</div>
+    <div class="chapter__number">第1章</div>
+    <h1 class="chapter__title">なぜ未来を考えるのか</h1>
+    <p class="chapter__subtitle">不確実な時代の航海術</p>
+
+    <div class="chapter__epigraph">
+        <p>未来は予測するものではない。未来は創るものである。</p>
+        <cite>— ピーター・ドラッカー</cite>
+    </div>
+
+    <!-- ===== Section 1 ===== -->
+    <h2>1-1. 石油危機を予見した人々</h2>
+
+    <p>1972年、世界はまだ安定した成長の只中にあった。先進国の経済は順調に拡大し、安価な石油が産業と日常生活の基盤を支えていた。翌年に世界を震撼させる石油危機を予測した人間は、ごくわずかだった。しかし、その「ごくわずか」のなかに、オランダの石油大手ロイヤル・ダッチ・シェルのシナリオチームがいた。</p>
+
+    <p>シェルのシナリオチームを率いていたのは、フランス出身のピエール・ワック（Pierre Wack）である。ワックは従来の経営企画部門とはまったく異なるアプローチをとっていた。単一の予測を精緻化するのではなく、「複数の未来の物語」を描き、そのなかで何が起こりうるかを探求する手法 ——「シナリオプランニング」—— を実践していたのである。</p>
+
+    <p>ワックのチームは、中東の地政学的動向、OPECの交渉力の変化、エネルギー需要の構造的変化を分析し、石油価格が急騰する世界のシナリオを描いていた。重要なのは、それが「当たった」ことではない。シェルの経営陣がそのシナリオに基づいて「心の準備」をしていたことである。石油危機が実際に起こったとき、シェルは競合他社よりも遥かに迅速に対応できた。他の石油メジャーが危機への対応に翻弄されるなか、シェルは世界第7位の石油会社から第2位へと躍進した。</p>
+
+    <p>この出来事は、20世紀後半のビジネス史における最も印象的なエピソードの一つとして語り継がれている。しかし、ここから学ぶべき本質は、シェルが石油危機を「予測した」ということではない。ワック自身が繰り返し強調したように、シナリオプランニングの目的は未来を予測することではなく、「意思決定者の世界の見方（mental model）を変えること」にある。シェルの経営陣は、シナリオを通じて「石油が安価であり続ける」という暗黙の前提を問い直し、異なる世界に備える思考の柔軟性を獲得していたのである。</p>
+
+    <div class="info-box info-box--primary">
+        <div class="info-box__label">人物紹介</div>
+        <p class="info-box__title">ピエール・ワック（Pierre Wack, 1922-1997）</p>
+        <p>フランス生まれ。ロイヤル・ダッチ・シェルのグループ・プランニング部門で1970年代にシナリオプランニングを確立した。東洋哲学への深い造詣を持ち、シナリオの本質を「心の変容」と位置づけた。1985年のHarvard Business Review論文「Scenarios: Uncharted Waters Ahead」は、シナリオプランニングの古典的テキストとして今も読み継がれている。</p>
+    </div>
+
+    <p>一方、地球の反対側では、もう一つの注目すべき実践が展開されていた。北欧の小国フィンランドは、1990年代に深刻な経済危機を経験した後、国家レベルでのフォーサイト（foresight: 先見的な未来思考）を制度化するという大胆な選択をした。フィンランド議会は1993年に世界で唯一の「未来委員会（Committee for the Future）」を常設し、すべての主要な政策領域について長期的な未来展望を検討する仕組みを構築した。</p>
+
+    <p>フィンランドの選択は偶然ではない。人口わずか550万人の小国が、ノキアの興亡、ロシアとの複雑な関係、EU加盟と通貨統合、デジタル変革と教育改革といった激動の30年を乗り越え、世界でもっとも革新的でレジリエントな社会の一つであり続けているのは、国家フォーサイトの継続的な実践と無関係ではない。フィンランドでは、首相が就任直後に「将来報告（Government Report on the Future）」を議会に提出することが慣例となっており、未来について体系的に考えることが政治文化の一部となっている。</p>
+
+    <p>シェルのシナリオチームとフィンランドの未来委員会。この二つの事例は、企業と国家というまったく異なるスケールにおいて、同じことを示している。すなわち、<strong>未来について体系的に考える力を持つ組織は、そうでない組織に比べて、不確実性に対してはるかに強靭である</strong>ということだ。</p>
+
+    <!-- ===== Section 2 ===== -->
+    <h2>1-2. なぜ今、未来を考えるのか</h2>
+
+    <p>「未来を考える」と言うと、多くの人は「そんな暇があるなら目の前の仕事を片付けたい」と感じるかもしれない。日々の業務に追われるビジネスパーソンにとって、未来について考えることは贅沢に思えるだろう。しかし、逆説的なことに、<strong>目の前の仕事に追われている人こそ、未来について考える必要がある</strong>。</p>
+
+    <p>なぜか。それは、私たちが日々行っている意思決定のほとんどが、実は暗黙の未来像に基づいているからである。新しい事業に投資するかどうか。どの技術を採用するか。どんな人材を採用するか。こうした意思決定はすべて、「この先、世界はこうなるだろう」という仮定の上に成り立っている。しかし、その仮定は多くの場合、意識的に検証されることがない。</p>
+
+    <p>たとえば、2019年末に2020年の事業計画を策定した企業のほとんどは、「世界的なパンデミックが経済活動を数ヶ月にわたって停止させる」というシナリオを考慮していなかった。COVID-19のパンデミックは、私たちの未来に対する暗黙の仮定がいかに脆弱であるかを、痛烈に示した出来事である。</p>
+
+    <p>しかし、パンデミックを「予測できなかった」ことが問題なのではない。問題は、私たちの多くが「根本的に異なる世界」の可能性について体系的に考える習慣を持っていなかったことにある。これは個人の能力の問題ではなく、組織と社会のリテラシーの問題である。</p>
+
+    <p>近年、ビジネスの文脈では「VUCA」（Volatility, Uncertainty, Complexity, Ambiguity）という概念が広く使われるようになった。世界は不安定で（Volatile）、不確実で（Uncertain）、複雑で（Complex）、曖昧である（Ambiguous）。この認識自体は重要だが、VUCAは「問題の記述」であって「解決策」ではない。世界がVUCAであることを嘆くだけでは、不確実性への対処能力は高まらない。</p>
+
+    <p>必要なのは、不確実性を前提として受け入れた上で、複数の可能性を探索し、組織の適応力を高めるための体系的なアプローチである。それこそが、本書で扱う「未来学（Futures Studies）」、そしてその実践的応用である「フォーサイト（Foresight）」が提供するものだ。</p>
+
+    <!-- ===== Section 3 ===== -->
+    <h2>1-3. よくある誤解 ── 未来学は「予測」ではない</h2>
+
+    <p>「未来学」という言葉を聞いて、多くの人がまず思い浮かべるのは「未来予測」だろう。テレビや書籍で「2050年の世界はこうなる」と語る識者の姿。AI、ロボット、宇宙開発、人口動態、気候変動……具体的な数字や時期を挙げて未来を語る行為は、知的好奇心を刺激する。しかし、本書で扱う「未来学（Futures Studies）」は、そうした予測とは根本的に異なるものである。</p>
+
+    <p>ここで、未来学の分野でもっとも有名な「法則」を一つ紹介しよう。ハワイ大学マノア校で半世紀以上にわたって未来学を教え続けたジム・デイター（Jim Dator）は、「デイターの第一法則」として次のように述べている。</p>
+
+    <div class="chapter__epigraph">
+        <p>未来は「予測」できない。</p>
+        <cite>— ジム・デイター「デイターの第一法則」</cite>
+    </div>
+
+    <p>未来学の創始者のひとりが、「未来は予測できない」と宣言している。これは逆説的に聞こえるかもしれないが、ここに未来学の本質がある。デイターが続けて述べる「第二法則」は、さらに重要である。</p>
+
+    <div class="chapter__epigraph">
+        <p>「未来」について有用なことは何であれ、最初は「馬鹿げたもの」に見えるはずだ。</p>
+        <cite>— ジム・デイター「デイターの第二法則」</cite>
+    </div>
+
+    <p>つまり、未来学が扱うのは「正確な予測」ではなく、「現在の常識では馬鹿げて見えるが、実は起こりうる可能性」なのである。この転換は決定的に重要だ。予測は「正しい未来を当てる」ことを目指すが、未来学は「複数のありうる未来を探索する」ことを目指す。予測が「答え」を求めるのに対し、未来学は「問い」を求める。</p>
+
+    <p>もう一つ、よくある誤解を解いておきたい。「未来学は楽観的な未来を描くものだ」あるいは逆に「未来学は危機を煽るものだ」という見方である。未来学は楽観でも悲観でもない。複数のありうる未来を <em>体系的に</em> 探索し、その中で「望ましい未来」に向けた行動を支援する学問である。未来学者の仕事は、バラ色の未来を描くことでも、ディストピアで恐怖を煽ることでもなく、<strong>可能性の空間を広げ、選択肢を見えるようにすること</strong>なのである。</p>
+
+    <!-- ===== Section 4 ===== -->
+    <h2>1-4. 予測とフォーサイトの違い</h2>
+
+    <p>本書を通じて理解していただきたいもっとも重要な区別の一つが、「予測（forecasting）」と「フォーサイト（foresight）」の違いである。この二つは日常語としてはほとんど同義に使われるが、未来学の文脈では明確に異なる概念である。</p>
+
+    <p>予測（forecasting）とは、過去のデータやトレンドに基づいて、未来の状態をできるだけ正確に推定しようとする営みである。天気予報、経済予測、人口推計、技術ロードマップなどがこれにあたる。予測は「もっとも起こりそうな未来（probable future）」を特定しようとする。この営み自体は有用であり、短中期の意思決定には不可欠である。しかし、予測には根本的な限界がある。それは、過去のパターンが将来も続くという仮定に依存していることだ。</p>
+
+    <p>フォーサイト（foresight）は、予測とは異なるアプローチをとる。フォーサイトは、「もっとも起こりそうな未来」だけでなく、「起こりうる複数の未来」を探索する。そして、それぞれの未来において何が起こりうるかを検討し、不確実性のなかでも堅牢な意思決定ができるよう支援する。フォーサイトの目的は「正しい予測」ではなく、「より良い準備」である。</p>
+
+    <!-- Diagram: Forecasting vs Foresight -->
+    <div class="diagram">
+        <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="予測とフォーサイトの比較図">
+            <!-- Background -->
+            <rect width="680" height="340" fill="none"/>
+
+            <!-- Left: Forecasting -->
+            <g transform="translate(20, 20)">
+                <rect x="0" y="0" width="300" height="300" rx="8" fill="#F8F5F0" stroke="#D4CBC0" stroke-width="1.5"/>
+                <text x="150" y="32" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="15" font-weight="700" fill="#8B6914">予測（Forecasting）</text>
+
+                <!-- Arrow: single line from past to future -->
+                <line x1="40" y1="180" x2="260" y2="120" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
+                <polygon points="260,120 248,127 250,117" fill="#8B6914"/>
+
+                <!-- Data points in the past -->
+                <circle cx="60" cy="190" r="4" fill="#8B6914"/>
+                <circle cx="90" cy="175" r="4" fill="#8B6914"/>
+                <circle cx="120" cy="180" r="4" fill="#8B6914"/>
+                <circle cx="150" cy="165" r="4" fill="#8B6914"/>
+                <circle cx="180" cy="155" r="4" fill="#8B6914"/>
+
+                <!-- Dashed projection -->
+                <line x1="180" y1="155" x2="260" y2="120" stroke="#8B6914" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+                <!-- Labels -->
+                <text x="60" y="230" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#666">過去のデータ</text>
+                <text x="220" y="105" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#666">予測値</text>
+
+                <!-- Time axis -->
+                <line x1="30" y1="250" x2="270" y2="250" stroke="#999" stroke-width="1"/>
+                <text x="50" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">過去</text>
+                <text x="150" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="middle">現在</text>
+                <text x="250" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="end">未来</text>
+
+                <text x="150" y="295" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">一つの「最も可能性の高い未来」</text>
+            </g>
+
+            <!-- Right: Foresight -->
+            <g transform="translate(360, 20)">
+                <rect x="0" y="0" width="300" height="300" rx="8" fill="#F8F5F0" stroke="#5C7C3A" stroke-width="1.5"/>
+                <text x="150" y="32" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="15" font-weight="700" fill="#5C7C3A">フォーサイト（Foresight）</text>
+
+                <!-- Multiple arrows fanning out -->
+                <line x1="80" y1="180" x2="260" y2="80" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <line x1="80" y1="180" x2="260" y2="130" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <line x1="80" y1="180" x2="260" y2="180" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+                <line x1="80" y1="180" x2="260" y2="230" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+
+                <!-- Arrow heads -->
+                <polygon points="260,80 248,87 250,77" fill="#5C7C3A" opacity="0.8"/>
+                <polygon points="260,130 248,137 250,127" fill="#5C7C3A" opacity="0.8"/>
+                <polygon points="260,180 248,187 250,177" fill="#5C7C3A" opacity="0.8"/>
+                <polygon points="260,230 248,237 250,227" fill="#5C7C3A" opacity="0.8"/>
+
+                <!-- Current point -->
+                <circle cx="80" cy="180" r="6" fill="#5C7C3A"/>
+
+                <!-- Labels for scenarios -->
+                <text x="268" y="82" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオA</text>
+                <text x="268" y="132" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオB</text>
+                <text x="268" y="182" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオC</text>
+                <text x="268" y="232" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオD</text>
+
+                <!-- Time axis -->
+                <line x1="30" y1="250" x2="270" y2="250" stroke="#999" stroke-width="1"/>
+                <text x="50" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">過去</text>
+                <text x="150" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="middle">現在</text>
+                <text x="250" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="end">未来</text>
+
+                <text x="150" y="295" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">複数の「ありうる未来」を探索</text>
+            </g>
+        </svg>
+        <p class="diagram__caption">図1-1: 予測とフォーサイトの違い。予測は過去の延長線上に一つの未来を推定するが、フォーサイトは現在から複数のありうる未来を探索する。</p>
+    </div>
+
+    <p>この違いを一覧にすると、次のようになる。</p>
+
+    <table class="comparison-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>予測（Forecasting）</th>
+                <th>フォーサイト（Foresight）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>目的</strong></td>
+                <td>もっとも起こりそうな未来を特定する</td>
+                <td>複数のありうる未来を探索し、準備する</td>
+            </tr>
+            <tr>
+                <td><strong>前提</strong></td>
+                <td>過去のパターンは概ね継続する</td>
+                <td>根本的な不連続が起こりうる</td>
+            </tr>
+            <tr>
+                <td><strong>アウトプット</strong></td>
+                <td>予測値（数値、トレンド線）</td>
+                <td>シナリオ（複数の物語）</td>
+            </tr>
+            <tr>
+                <td><strong>時間軸</strong></td>
+                <td>短〜中期（1〜5年）が得意</td>
+                <td>中〜長期（5〜30年以上）</td>
+            </tr>
+            <tr>
+                <td><strong>不確実性への態度</strong></td>
+                <td>縮小すべき誤差</td>
+                <td>探索すべき機会</td>
+            </tr>
+            <tr>
+                <td><strong>成功の基準</strong></td>
+                <td>予測の正確さ</td>
+                <td>意思決定の質の向上</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>重要なのは、予測とフォーサイトは「どちらが正しいか」という問題ではなく、「どちらが適切か」という問題であるということだ。安定した環境における短期的な意思決定には予測が有効であり、不確実性が高く長期的な視点が必要な場面にはフォーサイトが有効である。多くの場合、両者を組み合わせて使うことが最善である。本書は、予測を否定するのではなく、予測だけでは不十分な場面においてフォーサイトが何を提供できるかを示すものである。</p>
+
+    <!-- ===== Section 5 ===== -->
+    <h2>1-5. 日本のビジネスにおける未来思考の系譜</h2>
+
+    <p>「未来学」は日本にとって縁遠い学問ではない。むしろ、日本は世界でもっとも早い時期から未来学に取り組んだ国の一つである。</p>
+
+    <p>1960年代、高度経済成長のただ中にあった日本では、「未来学ブーム」と呼ぶべき知的潮流が起こっていた。1967年、林雄二郎が『未来予測の方法論』を出版し、デルファイ法をはじめとする未来研究の方法論を日本に体系的に紹介した。翌1968年には加藤秀俊と林雄二郎の共著『未来学』が刊行され、一般読者にも未来学の世界が開かれた。同年、人類学者の梅棹忠夫は『情報産業論』のなかで「情報産業」という概念を提唱し、工業社会の次に来る情報社会の姿を先見的に描いた。この論考は、アルビン・トフラーの『第三の波』（1980年）に先立つこと12年のものである。</p>
+
+    <p>この知的潮流は、1970年の大阪万博（日本万国博覧会）で一つの頂点を迎える。「人類の進歩と調和」をテーマに掲げた大阪万博は、来場者数6,421万人を記録し、日本社会全体が未来に向けた高揚感に包まれた時代の象徴であった。万博の企画には、丹下健三、梅棹忠夫、小松左京らが参画し、建築、文化人類学、SF文学が交差する独自の未来構想が展開された。</p>
+
+    <p>しかし、日本の未来学は1970年代以降、急速に衰退する。二度の石油危機、バブル崩壊、「失われた30年」を経る中で、日本社会は未来に対する楽観を失い、未来学への関心も薄れていった。一方で、文部科学省のNISTEP（科学技術・学術政策研究所）は1971年から継続的に大規模なデルファイ調査を実施しており、2019年には第11回調査を完了している。約700名の専門家が約700テーマについて回答するこの調査は、世界最大規模のデルファイ・プロジェクトの一つであり、50年以上にわたる継続実施は世界的にも稀な事例である。</p>
+
+    <p>近年、日本でも未来学への関心が再び高まりつつある。背景には、気候変動、人口減少、AI革命といった長期的な構造変化への対応の必要性がある。高知工科大学の西條辰義教授が提唱する「フューチャー・デザイン」は、将来世代の利益を現在の意思決定に組み込む制度設計として世界的な注目を集めている。岩手県矢巾町では、町民が「仮想将来世代」として未来の住民の立場から政策を議論する実験が行われ、Nature誌にも取り上げられた。これは日本発のオリジナルな未来学の実践であり、世界の未来学コミュニティからも高く評価されている。</p>
+
+    <p>また、企業の世界でも変化が起きている。日立製作所はフォーサイト部門を設置し、組織的な未来思考の実践に取り組んでいる。楠瀬信太郎の『シナリオ・シンキング』（2021年）は、日本企業の文脈でフォーサイトを再解釈した実践書として注目されている。経済産業省の「2050年の産業構造審議会」、内閣府の「ムーンショット型研究開発制度」など、政策レベルでも長期的な未来思考への関心は高まっている。</p>
+
+    <p>しかし、率直に言って、日本の未来学は世界の水準から大きく遅れている。英語圏では、ハワイ大学マノア校（1975年設立）やヒューストン大学（同年設立）に未来学の大学院プログラムが50年近く継続して存在し、フィンランド、ドイツ、台湾、南アフリカ、コロンビアにも専門課程がある。しかし、日本にはフューチャーズ・スタディーズの専門大学院プログラムは存在せず、体系的な入門テキストも事実上存在しない。本書は、その空白を埋めることを目指している。</p>
+
+    <div class="info-box info-box--accent">
+        <div class="info-box__label">事例</div>
+        <p class="info-box__title">岩手県矢巾町のフューチャー・デザイン実験</p>
+        <p>岩手県矢巾町では、2015年から西條辰義教授の「フューチャー・デザイン」の手法を用いた社会実験が行われている。町の水道料金の改定について議論する際、参加者の半数が「仮想将来世代」の役割を担い、2060年の矢巾町の住民として発言する。興味深いことに、仮想将来世代の役割を担った参加者は、そうでない参加者と比べて、長期的な持続可能性を重視する判断をする傾向が顕著に見られた。この実験は、人間が適切な「立場」を与えられれば、将来世代の利益を考慮する能力を発揮できることを示している。</p>
+    </div>
+
+    <!-- ===== Section 6 ===== -->
+    <h2>1-6. 本書で学べること</h2>
+
+    <p>本書は、未来学（Futures Studies）の世界への招待状である。日本のビジネスパーソンと社会実践者のために、世界の未来学の知的遺産を体系的に、かつ実践的に紹介することを目指している。</p>
+
+    <p>本書は5部20章で構成されている。</p>
+
+    <p><strong>Part I「未来学とは何か」</strong>（第1-3章）では、本章で述べた基本的な問題意識を出発点に、未来学の80年の歴史と、世界の17の知的学派を概観する。未来学は一枚岩の学問ではなく、軍事的起源を持つ計量的伝統から、ポストコロニアルな批判的伝統まで、実に多様な知的系譜の集合体である。その全体像を俯瞰することが、本書の旅の出発点となる。</p>
+
+    <p><strong>Part II「未来学の認識論」</strong>（第4-6章）では、「まだ存在しないもの」をどのように知りうるのかという哲学的問いに取り組む。フューチャーズ・コーン（可能・蓋然・望ましい未来の円錐モデル）やデイターの4つの代替未来原型など、未来を構造的に理解するためのフレームワークを学ぶ。また、不確実性そのものを分類・理解するための枠組みを紹介し、「わからないこと」に対する知的な態度を養う。</p>
+
+    <p><strong>Part III「未来学の手法」</strong>（第7-13章）は、本書の最も実践的なパートである。環境スキャニング（弱いシグナルの検出）、シナリオプランニング（複数の未来の物語を描く）、デルファイ法（専門家の知見を集約する）、因果階層分析（CLA: 問題の深層構造を掘り下げる）、スリーホライズン（変革の3つの地平）、デザインフューチャーズ（未来を体験可能にする）、システム思考（複雑系を理解する）という7つの主要手法を、それぞれ一章ずつ丁寧に解説する。</p>
+
+    <p><strong>Part IV「未来学の倫理と実践」</strong>（第14-17章）では、未来学が提起する倫理的問いと、実際の組織・社会での実践を論じる。将来世代への責任、企業フォーサイト、政府フォーサイト、そして参加型未来（市民が未来を共に描くプロセス）を取り上げる。とりわけ、日本発のフューチャー・デザインの理論と実践に一章を割き、日本が世界に貢献できる未来学の領域を示す。</p>
+
+    <p><strong>Part V「未来学の最前線」</strong>（第18-20章）では、AIと未来学の関係、脱植民地的未来と多元的世界、そしてフューチャーズ・リテラシー（未来を「使う」力）という三つの最前線を探求する。未来学は完成した学問ではなく、今まさに進化の途上にある。その最先端の議論に触れることで、読者自身が未来学の未来を構想する力を得ることを目指す。</p>
+
+    <p>本書を読み終えたとき、読者は未来学の知的伝統を概観し、主要な手法を理解し、自身の仕事や活動に未来思考を応用するための基盤を得ているだろう。しかし、もっとも大切なことは知識の習得ではない。本書が目指すのは、読者の「未来との付き合い方」を変えることである。</p>
+
+    <p>未来は予測するものではない。未来は、複数のありうる可能性として探求し、その中から望ましいものを選び取り、今日の行動によって創造していくものである。その営みを支える知的技法の体系が、未来学である。</p>
+
+    <p>さあ、航海を始めよう。</p>
+
+    <!-- ===== References ===== -->
+    <div class="chapter__references">
+        <h2>参考文献・さらに学ぶための読書案内</h2>
+        <ul>
+            <li>Schwartz, Peter (1991) <em>The Art of the Long View: Planning for the Future in an Uncertain World</em>. Currency Doubleday. [邦訳：『シナリオ・プランニング』東洋経済新報社]</li>
+            <li>Bell, Wendell (1997) <em>Foundations of Futures Studies, Vol. 1: Human Science for a New Era</em>. Transaction Publishers.</li>
+            <li>Slaughter, Richard (1996) <em>The Foresight Principle: Cultural Recovery in the 21st Century</em>. Praeger.</li>
+            <li>Wack, Pierre (1985) "Scenarios: Uncharted Waters Ahead." <em>Harvard Business Review</em>, Sept-Oct 1985.</li>
+            <li>Dator, Jim (2019) <em>Jim Dator: A Noticer in Time</em>. Springer.</li>
+            <li>Gidley, Jennifer (2017) <em>The Future: A Very Short Introduction</em>. Oxford University Press.</li>
+            <li>西條辰義 編 (2015) 『フューチャー・デザイン：七世代先を見据えた社会』勁草書房.</li>
+            <li>林雄二郎 (1967) 『未来予測の方法論』日本経済新聞社.</li>
+            <li>梅棹忠夫 (1968) 「情報産業論」（『放送朝日』掲載）</li>
+            <li>楠瀬信太郎 (2021) 『シナリオ・シンキング：不確実な未来への「構え」をデザインする』ダイヤモンド社.</li>
+        </ul>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="chapter__nav">
+        <a href="../index.html">目次に戻る</a>
+        <a href="ch02.html">次章: 未来学の80年 &rarr;</a>
+    </nav>
+
+</article>
+
+<!-- Footer -->
+<footer class="site-footer">
+    &copy; NPO法人ミラツク（MIRA TUKU）. 未来を拓く力 — フューチャーズ・スタディーズ入門
+</footer>
+
+<!-- Theme Toggle Script -->
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    }
+
+    // Restore saved theme
+    (function() {
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            document.documentElement.setAttribute('data-theme', saved);
+        }
+    })();
+</script>
+
+</body>
+</html>
