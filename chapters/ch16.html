@@ -56,14 +56,6 @@ body {
 }
 
 /* ---- Theme toggle ---- */
-.theme-toggle {
-  position: fixed; top: 16px; right: 16px; z-index: 100;
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid var(--border); background: var(--card);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; transition: opacity .2s;
-}
-.theme-toggle:hover { opacity: .7; }
 
 /* ---- Header ---- */
 .report-header {
@@ -644,17 +636,8 @@ h2.article-h2:first-of-type { margin-top: 0; }
   background: var(--accent-muted);
   border-color: var(--accent);
 }
-/* ---- Print button ---- */
-.print-btn {
-  position: fixed; top: 16px; right: 60px; z-index: 100;
-  padding: 6px 14px; border-radius: 6px;
-  border: 1px solid var(--border); background: var(--card);
-  cursor: pointer; font-size: 0.72rem; color: var(--text-muted);
-  font-family: var(--sans);
-}
-.print-btn:hover { opacity: 0.7; }
 @media print {
-  .theme-toggle, .print-btn, .chapter-nav, .report-back { display: none !important; }
+  .dl-bar, .chapter-nav, .report-back { display: none !important; }
 }
 @media (max-width: 600px) {
   .report-title { font-size: 1.3rem; }
@@ -662,12 +645,39 @@ h2.article-h2:first-of-type { margin-top: 0; }
   .key-metrics-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+
+/* ---- Download buttons ---- */
+.dl-bar {
+  position: fixed; top: 12px; right: 16px; z-index: 100;
+  display: flex; gap: 6px; align-items: center;
+}
+.dl-bar button {
+  padding: 5px 12px; border-radius: 5px;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; font-size: 0.70rem; color: var(--text-muted);
+  font-family: var(--sans); transition: all 0.15s; white-space: nowrap;
+}
+.dl-bar button:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle {
+  position: static !important;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
 </style>
 </head>
 <body>
-<button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'" aria-label="テーマ切替">&#9681;</button>
-<button class="print-btn" onclick="window.print()">Print / PDF</button>
-
+<div class="dl-bar">
+  <button onclick="downloadText()">TXT</button>
+  <button onclick="downloadPDF()">PDF</button>
+  <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'" aria-label="テーマ切替">&#9681;</button>
+</div>
+<div class="dl-bar">
+  <button onclick="downloadText()">TXT</button>
+  <button onclick="downloadPDF()">PDF</button>
+  <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'" aria-label="テーマ切替">&#9681;</button>
+</div>
 <header class="report-header">
   <div class="report-header-inner">
     <a href="https://yuyanishimura0312.github.io/miratuku-news-v2/textbook.html" class="report-back">&larr; 未来を読む力 — 目次に戻る</a>
@@ -932,6 +942,42 @@ h2.article-h2:first-of-type { margin-top: 0; }
   <p>「未来を読む力 — 現代未来学の理論と実践」NPO法人ミラツク 編<br>
   Futures Studies Knowledge DB（448研究者・99手法・507概念・17学派・40論争）に基づく</p>
 </footer>
+
+
+<script>
+function downloadText() {
+  const article = document.querySelector('.article');
+  if (!article) return;
+  // Get text content, clean up
+  let text = '';
+  const title = document.querySelector('.report-title');
+  const subtitle = document.querySelector('.report-subtitle');
+  if (title) text += title.textContent + '\n';
+  if (subtitle) text += subtitle.textContent + '\n\n';
+  // Walk through article children
+  article.querySelectorAll('h2, h3, p, li, .pullquote, .insight-box p, blockquote, .callout p, .callout-concept p, .callout-case p, .callout-person p, td').forEach(el => {
+    const tag = el.tagName.toLowerCase();
+    const t = el.textContent.trim();
+    if (!t) return;
+    if (tag === 'h2') text += '\n\n== ' + t + ' ==\n\n';
+    else if (tag === 'h3') text += '\n--- ' + t + ' ---\n\n';
+    else if (tag === 'li') text += '  - ' + t + '\n';
+    else text += t + '\n\n';
+  });
+  // Create blob and download
+  const blob = new Blob([text], { type: 'text/plain; charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const chNum = document.title.match(/第(\d+)章/);
+  a.download = chNum ? 'ch' + chNum[1].padStart(2,'0') + '.txt' : 'chapter.txt';
+  a.href = url;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function downloadPDF() {
+  window.print();
+}
+</script>
 
 </body>
 </html>
