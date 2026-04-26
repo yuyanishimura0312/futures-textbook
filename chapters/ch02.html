@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2章 未来学の80年史 — 未来を読む力</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8B6914;
+      --secondary: #D4A84B;
+      --accent: #5C7C3A;
+      --bg: #F8F5F0;
+      --bg-card: #FFFDF9;
+      --text: #2C2416;
+      --text-light: #6B5C3E;
+      --border: #E0D4B8;
+      --shadow: rgba(139, 105, 20, 0.08);
+      --chapter-num: #C9A84C;
+    }
+    [data-theme="dark"] {
+      --bg: #1A1710;
+      --bg-card: #231F17;
+      --text: #EDE8DC;
+      --text-light: #A89B7A;
+      --border: #3A3220;
+      --shadow: rgba(0,0,0,0.3);
+      --primary: #C9A84C;
+      --secondary: #8B6914;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Serif JP', 'Georgia', serif;
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.95;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Header */
+    .site-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.6rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+    .site-header a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .site-header a:hover { color: #fff; }
+    .header-right { display: flex; gap: 1rem; align-items: center; }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .btn {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.25); }
+
+    /* Chapter hero */
+    .chapter-hero {
+      background: linear-gradient(135deg, #4A3510 0%, #7A5820 40%, #8B6914 100%);
+      color: #fff;
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .chapter-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .chapter-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .chapter-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+    .chapter-subtitle {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.05em;
+    }
+    .chapter-epigraph {
+      max-width: 560px;
+      margin: 2.5rem auto 0;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      border-left: 3px solid var(--secondary);
+      padding-left: 1.25rem;
+      text-align: left;
+    }
+    .chapter-epigraph cite {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: normal;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* Layout */
+    .page-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1.75rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+    .toc h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .toc ol {
+      padding-left: 1.2rem;
+    }
+    .toc li {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+    .toc a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--primary); }
+
+    /* Body text */
+    .prose h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--border);
+      scroll-margin-top: 4rem;
+    }
+    .prose h3 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      scroll-margin-top: 4rem;
+    }
+    .prose p {
+      margin-bottom: 1.4em;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .prose p:first-of-type::first-letter {
+      font-size: 3.2em;
+      float: left;
+      line-height: 0.78;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--primary);
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+    }
+
+    /* Section intro reset drop-cap for non-first sections */
+    .section-intro::first-letter {
+      font-size: 1em;
+      float: none;
+      line-height: inherit;
+      margin: 0;
+      color: inherit;
+      font-weight: inherit;
+    }
+
+    /* Figures */
+    .figure {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.5rem 1.5rem;
+      margin: 2.5rem 0;
+      overflow-x: auto;
+    }
+    .figure figcaption {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 1rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Info boxes */
+    .callout {
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+    .callout-person {
+      background: linear-gradient(135deg, rgba(139,105,20,0.07) 0%, rgba(212,168,75,0.05) 100%);
+      border-left: 4px solid var(--secondary);
+    }
+    .callout-case {
+      background: linear-gradient(135deg, rgba(92,124,58,0.07) 0%, rgba(92,124,58,0.03) 100%);
+      border-left: 4px solid var(--accent);
+    }
+    .callout-tip {
+      background: rgba(139,105,20,0.05);
+      border: 1px dashed var(--secondary);
+    }
+    .callout h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .callout-person h4 { color: var(--primary); }
+    .callout-case h4 { color: var(--accent); }
+    .callout-tip h4 { color: var(--primary); }
+    .callout p { margin-bottom: 0.6em; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* Chapter summary */
+    .chapter-summary {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 0 0 8px 8px;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+    .chapter-summary h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border: none;
+      padding: 0;
+    }
+    .chapter-summary ul {
+      padding-left: 1.2rem;
+    }
+    .chapter-summary li {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* References */
+    .references {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .references h2 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      border: none;
+      padding: 0;
+    }
+    .references p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.4em;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* Navigation */
+    .chapter-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .nav-link {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+      max-width: 45%;
+    }
+    .nav-link:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .nav-link-next { margin-left: auto; text-align: right; }
+    .nav-label { font-size: 0.7rem; color: var(--text-light); display: block; margin-bottom: 0.15rem; }
+    .nav-link:hover .nav-label { color: rgba(255,255,255,0.7); }
+
+    /* Print styles */
+    @media print {
+      .site-header, .controls, .chapter-nav, .toc, .btn { display: none !important; }
+      body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.8; }
+      .chapter-hero { background: #333; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-wrapper { max-width: 100%; padding: 1cm 0; }
+      .prose h2 { page-break-after: avoid; margin-top: 2rem; }
+      .prose p { orphans: 3; widows: 3; }
+      .figure { page-break-inside: avoid; border: 1px solid #ccc; }
+      .callout { page-break-inside: avoid; }
+      @page { size: A4; margin: 25mm 20mm; }
+      @page :first { margin-top: 15mm; }
+    }
+
+    @media (max-width: 600px) {
+      .page-wrapper { padding: 2rem 1.25rem 4rem; }
+      .chapter-hero { padding: 3rem 1.25rem 2.5rem; }
+      .chapter-nav { flex-direction: column; }
+      .nav-link { max-width: 100%; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+<header class="site-header">
+  <a href="../index.html">未来を読む力 — 現代未来学の理論と実践</a>
+  <div class="header-right">
+    <div class="controls">
+      <button class="btn" onclick="toggleDark()">ダーク切替</button>
+      <button class="btn" onclick="window.print()">印刷 / PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="chapter-hero">
+  <div class="chapter-label">Chapter 2 &nbsp;|&nbsp; Part I: 未来学とは何か</div>
+  <h1 class="chapter-title">未来学の80年史</h1>
+  <div class="chapter-subtitle">RANDからアンティシペーションまで</div>
+  <blockquote class="chapter-epigraph">
+    「未来はすでに起こっている。ただ、まだ均等に配分されていないだけだ」
+    <cite>— ウィリアム・ギブスン</cite>
+  </blockquote>
+</div>
+
+<div class="page-wrapper">
+  <nav class="toc">
+    <h2>本章の構成</h2>
+    <ol>
+      <li><a href="#s1">第一期（1940年代〜50年代）— 軍事の知性としての誕生</a></li>
+      <li><a href="#s2">第二期（1950年代〜60年代）— ヨーロッパの応答</a></li>
+      <li><a href="#s3">第三期（1960年代〜70年代）— 制度化の時代</a></li>
+      <li><a href="#s4">第四期（1970年代〜80年代）— シェルの革命と企業フォーサイト</a></li>
+      <li><a href="#s5">第五期（1990年代）— 批判的転回</a></li>
+      <li><a href="#s6">第六期（2000年代〜10年代）— デザイン、アンティシペーション、脱植民地化</a></li>
+      <li><a href="#s7">第七期（2020年代）— AIと多元的危機の時代</a></li>
+      <li><a href="#diagram1">図1: 17学派の展開タイムライン</a></li>
+      <li><a href="#diagram2">図2: 世界の未来学機関分布マップ</a></li>
+    </ol>
+  </nav>
+
+  <article class="prose">
+
+    <p>学問の誕生を正確に特定することは難しい。物理学はニュートンとともに始まったのか、それともアリストテレスまで遡るのか。しかし未来学については、比較的明確な起点を語ることができる。それは1940年代のアメリカ、冷戦の胎動の中に設立されたRANDコーポレーションという知の工場であった。そこから80年あまりにわたって、未来を体系的に探求する試みはグローバルに広がり、軍事から企業経営へ、欧米からアジア・アフリカへ、そして純粋な予測から参加型の意味づくりへと、絶え間なく変容してきた。本章では、その80年の歩みを7つの時代区分に沿って辿ることで、現在の未来学がどのような知的伝統の上に立っているのかを明らかにする。</p>
+
+    <!-- SECTION 1 -->
+    <h2 id="s1">1. 第一期（1940年代〜50年代）— 軍事の知性としての誕生</h2>
+
+    <p>1945年の秋、ダグラス・エアクラフト社、AT&amp;T、アメリカ陸軍航空隊の三者が出資し、サンタモニカの海岸沿いに奇妙な組織が産声を上げた。RAND（Research ANd Development）コーポレーションである。表向きは民間のシンクタンクだが、実態は軍事戦略のための頭脳集団であり、核兵器の時代における意思決定の方法論を開発することがその使命であった。RAND に集まった研究者たちが取り組んだ問いは、単純にして根本的なものだった。「次に何が起こるかを、いかにして合理的に推論できるか」。その問いへの回答として生まれた手法群が、今日の未来学の原型となった。</p>
+
+    <p>核戦略家として後に悪名と名声の双方を得ることになるハーマン・カーンは、RAND において「考えられないことを考える（thinking about the unthinkable）」という標語のもと、核戦争のシナリオを詳細に描き出した。1960年に出版された『熱核戦争について（On Thermonuclear War）』は、倫理的批判を浴びながらも、想像を絶するほど悲惨な事態をあえて具体化することで対策を可能にするという知的態度の宣言であった。カーンの功績は、「起こってほしくない未来こそ、もっとも詳しく想像しなければならない」という逆説的な洞察を制度化したことにある。この逆説は、今日の未来学においても変わらぬ核心をなしている。</p>
+
+    <p>同じ頃、RAND の研究者オルフ・ヘルマーとノーマン・ダルキーは、まったく異なる問題に取り組んでいた。軍事技術の将来予測において、どうすれば専門家の知恵を系統的に集約できるか。通常の委員会方式では、声の大きい者や地位の高い者の意見が支配してしまう。彼らはこの問題を解決するために、匿名性と反復的フィードバックを組み合わせた調査手法を開発し、「デルファイ法（Delphi method）」と名付けた。ギリシャのデルポイ神殿――未来を知る神託の地――にちなんだこの名称は、科学的手法に古代的な権威を与えるユーモラスな選択でもあった。デルファイ法はその後、技術予測から政策立案、企業戦略まで広く使われる手法となり、21世紀の今日も世界各地で実施されている。</p>
+
+    <callout class="callout callout-person">
+      <h4>人物紹介：ハーマン・カーン（1922–1983）</h4>
+      <p>カリフォルニア生まれの物理学者・戦略家。RAND コーポレーションでの研究を経て、ハドソン研究所を設立。「考えられないことを考える」という姿勢でシナリオ分析の先駆者となった。スタンリー・キューブリック監督の映画『博士の異常な愛情』の主人公バック・タッター博士のモデルの一人とされる。未来学における「複数の未来」の発想を体系化した先駆者であり、後のシナリオプランニングに決定的な影響を与えた。</p>
+    </callout>
+
+    <p>RAND が生み出したもう一つの重要な遺産は、システム分析という思考様式である。複雑な軍事的・政策的問題を、相互に連関したサブシステムの集合として捉え直す手法は、後にシステム思考として一般化し、現代の複雑系科学や組織論の基礎となった。冷戦という極端な状況が、皮肉にも未来思考の方法論を急速に洗練させたのである。RANDという装置は「軍事的理性の工場」であったが、そこで鍛えられた道具立ては、やがて平和的な用途に転用されていった。</p>
+
+    <!-- SECTION 2 -->
+    <h2 id="s2">2. 第二期（1950年代〜60年代）— ヨーロッパの応答</h2>
+
+    <p>アメリカのRAND が軍事的合理主義の産物であったとすれば、ヨーロッパの未来思考は、まったく異なる精神的土壌から育まれた。第二次世界大戦の廃墟の中で、ヨーロッパの知識人たちは「なぜ人間は未来を構想できなかったのか」という根本的な問いに直面していた。彼らの応答は、アメリカよりも哲学的で、人間主義的な色彩を帯びていた。</p>
+
+    <p>フランスでは、哲学者で行政官のガストン・ベルジェが1950年代に「ラ・プロスペクティブ（la prospective）」と呼ばれる知的運動を起こした。「見通す（prospecter）」という動詞から作られたこの言葉には、単なる予測を超えた積極的な意味が込められていた。ベルジェにとって、未来を展望することは受動的な行為ではなく、現在の意思決定を深める能動的な実践であった。「未来は予測されるものではなく、意志されるものだ（Le futur n'est pas à prévoir, il est à vouloir）」という彼の言葉は、今日のフランス語圏未来学の精神的礎として残っている。ベルジェは1960年に交通事故で突然の死を迎えるが、彼が蒔いた種は、後継者たちによって豊かに実った。</p>
+
+    <p>同じ時期、ドイツでは망命知識人オシップ・フレヒトハイムが、1943年に「未来学（Futurologie）」という言葉を作り出した。ユダヤ系ドイツ人として迫害を逃れてアメリカに亡命したフレヒトハイムは、戦後再びドイツに帰国し、過去の惨禍を繰り返さないための知的プロジェクトとして未来学を構想した。彼の未来学は、過去の歴史学・現在の政治学と並ぶ新しい学問分野として未来を体系的に研究することを目指すものであり、強い規範的・倫理的関心を持っていた。「未来学」という言葉自体の語源がドイツ語であることは、この学問の欧州的根を象徴している。</p>
+
+    <callout class="callout callout-person">
+      <h4>人物紹介：フレデリク・ポラック（1907–1985）</h4>
+      <p>オランダの社会学者。1955年に出版された大著『未来のイメージ（The Image of the Future）』において、文明の盛衰と人々の「未来イメージ」の豊かさの間に密接な相関関係があることを論じた。ポラックによれば、社会が持つ肯定的な未来イメージが希薄になるとき、その文明は衰退の兆しを示す。逆に、明るく力強い未来ビジョンが共有されているとき、社会は創造的なエネルギーに満ちる。この洞察は、今日のフューチャーズ・リテラシー論に受け継がれている。</p>
+    </callout>
+
+    <p>オーストリアのジャーナリスト・活動家ロベルト・ユングクは、さらに異なる方向から未来思考に貢献した。「未来の工房（Zukunftswerkstatt）」と呼ばれる参加型ワークショップの手法を開発したユングクは、未来は専門家や権力者だけのものではなく、すべての市民が参加して創り出すものだという信念を持っていた。彼のアプローチは、のちに参加型フォーサイト、コミュニティ・フューチャリング、さらにはUNESCOのフューチャーズ・リテラシーへと連なる参加型実践の系譜の源流となった。エリートの書斎から市民の広場へ——ユングクは未来学の民主化を先駆けた人物である。</p>
+
+    <p>オランダの社会学者フレデリク・ポラックの貢献も忘れてはならない。彼の大著『未来のイメージ』は、文明の盛衰とそこに生きる人々の「未来イメージ」の質の間に、深い相関関係があることを論証した。ある文明が生き生きとした肯定的な未来像を共有しているとき、その文明は創造的なエネルギーに満ちている。しかし未来への期待が失われると、文明は萎縮し始める。この洞察は、今日のフューチャーズ・リテラシー論——未来を「使う」能力の育成——に直結しており、ポラックは70年先を見通していたとも言える。</p>
+
+    <!-- SECTION 3 -->
+    <h2 id="s3">3. 第三期（1960年代〜70年代）— 制度化と大衆化の時代</h2>
+
+    <p>1960年代に入ると、未来学は学術的制度として定着し始めると同時に、社会的な関心事として大衆の前に姿を現した。その両面を象徴する出来事が続いた。ダニエル・ベルはコロンビア大学、後にハーバード大学において、社会科学の一領域として未来研究を確立しようとした。彼は1973年に『脱工業社会の到来（The Coming of Post-Industrial Society）』を著し、情報と知識が経済の主軸となる時代の到来を、豊富なデータとともに描き出した。ベルの業績は、未来学が「根拠のある思索」であることを学術的に証明しようとする意志の表れであった。</p>
+
+    <p>ハワイ大学のジム・デイターは、1968年に政治学の一部門として未来研究を教え始め、後に世界で最初の未来学専門大学院プログラムのひとつを立ち上げた。デイターのハワイは、太平洋の地政学的位置から、アジア・太平洋の視点を未来学に持ち込むユニークな拠点となった。「代替的未来の4原型（成長・崩壊・規律・変容）」と「デイターの第一法則（いかなる有用な未来アイデアも、最初は馬鹿げて見える）」は、今日の未来学実践の基本語彙として世界中で使われている。</p>
+
+    <callout class="callout callout-case">
+      <h4>事例：日本未来学会の創設（1968年）</h4>
+      <p>1968年は日本の未来学にとって特別な年である。大阪万博の開幕（1970年）に向けて未来への期待が高まる中、日本未来学会が創設された。梅棹忠夫、加藤秀俊、林雄二郎らが中心となったこの学会は、西洋の未来学とは異なる東洋的な時間観や文明観を取り込もうとする野心的な試みだった。万博のテーマ「人類の進歩と調和」は、まさに未来学的な問いを体現していた。しかしその後、日本の未来学は長い停滞期に入る。失われた30年の間、未来への楽観が社会から退潮したことと、この衰退は無縁ではない。</p>
+    </callout>
+
+    <p>制度化と並行して起きたのが、未来学の大衆化である。アルビン・トフラーが1970年に出版した『未来の衝撃（Future Shock）』は、近代化のスピードが人間の適応能力を超えつつあるという警告を、鮮明なジャーナリズム的文体で描いた。本書は世界で600万部以上を売り上げ、「フューチャー・ショック」という概念を日常語に変えた。トフラーは学術的な未来学者ではなかったが、彼の仕事は未来思考への社会的関心を一挙に高め、次世代の未来学者たちを鼓舞した。アカデミアとジャーナリズムのちょうど境界線に立ったトフラーの存在は、未来学が「専門家の密室」に閉じこもることなく公共知として機能し得ることを示した。</p>
+
+    <p>1972年、ローマクラブが委託した研究プロジェクトの成果として発表された『成長の限界（The Limits to Growth）』は、コンピューターシミュレーションを用いて地球規模の資源・環境問題を定量的に示し、世界に大きな衝撃を与えた。ドネラ・メドウズを筆頭とするMIT研究チームが構築した「ワールド3」モデルは、人口爆発・資源枯渇・環境汚染の相互作用を系統的に分析し、「現在の成長トレンドが続けば、100年以内に地球の成長限界に達する」という結論を打ち出した。50年後の今日、その予測の多くは驚くべき精度で現実を追っている。『成長の限界』は、システム思考と定量的未来分析の可能性を全世界に示した記念碑的作品である。</p>
+
+    <!-- SECTION 4 -->
+    <h2 id="s4">4. 第四期（1970年代〜80年代）— シェルの革命と企業フォーサイト</h2>
+
+    <p>未来学の歴史において最も劇的な実践的応用が起きたのは、1970年代のロイヤル・ダッチ・シェル社においてであった。フランス人プランナーのピエール・ワックは、1971年から1972年にかけて、当時の石油業界の常識とは相容れない一連のシナリオを社内で展開していた。彼のシナリオは、中東の産油国が石油を政治的武器として使用する可能性を真剣に検討したものであった。1973年10月、エジプトとシリアがイスラエルに侵攻し、アラブ産油国が石油禁輸を決定したとき、ほぼすべての石油会社が混乱に陥る中、シェルだけは素早く行動できた。シナリオが現実になったとき、すでにその現実の中で生きることを「練習」していたからである。</p>
+
+    <p>ワックの後継者ピーター・シュワルツとクース・ファン・デル・ハイデンは、シェルのシナリオ手法をさらに洗練させ、一般化した。シュワルツが1991年に著した『長期的視点（The Art of the Long View）』は、シナリオプランニングの「福音書」として世界中のビジネスパーソンに読まれた。ファン・デル・ハイデンの『シナリオ（Scenarios: The Art of Strategic Conversation）』は、シナリオを単なる計画ツールではなく、組織の戦略的対話を促進する「会話の構造」として再定義した。この二人の貢献によって、シナリオプランニングは学術的な演習から実用的な経営ツールへと変容し、その後の数十年で世界の大企業・政府機関に広まった。</p>
+
+    <callout class="callout callout-person">
+      <h4>人物紹介：ピエール・ワック（1922–1997）</h4>
+      <p>フランス生まれの石油会社プランナー。瞑想と禅への深い関心を持つ異色のビジネスパーソンであり、その思索は「内なる宇宙」と「外なる世界」を橋渡しするものだった。シェルでのシナリオ実践を「マネジャーのメンタルモデルを変えること」と定義したワックは、シナリオを単なる予測ではなく、意識変革のツールとして捉えていた。彼のHBR論文「Scenarios: Uncharted Waters Ahead」（1985年）は、シナリオプランニングの古典として今日も読み継がれている。</p>
+    </callout>
+
+    <p>1987年には、シュワルツが中心となってグローバル・ビジネス・ネットワーク（GBN）が設立された。スチュアート・ブランド、ブライアン・イーノ、ケビン・ケリーらカウンターカルチャーの知識人たちとシナリオプランナーを結びつけたGBNは、未来学に独特の「異端の知性」を持ち込んだ。GBNは企業フォーサイトをビジネスとして確立し、多くの大企業・政府機関にシナリオサービスを提供した。この時期に企業フォーサイトはひとつの「産業」として成熟し、プランニング部門を持つことが大企業の標準的なプラクティスとなっていった。</p>
+
+    <p>フランスでは、この時期に「ラ・プロスペクティブ」が独自の方法論的体系を確立した。ミシェル・ゴデは構造分析（MICMAC）、ステークホルダー分析（MACTOR）、射形分析（MORPHOL）といった定量的手法を開発し、「計画のツールキット」として体系化した。ゴデのアプローチはアングロサクソン系の「直感的ロジック」法とは対照的に、より数理的・形式的であり、フランス語圏の行政・企業に深く根付いた。同一の「シナリオプランニング」という概念の下に、英米系とフランス系という二つの異なる実践流派が共存しているのは、今日の未来学の重要な特徴のひとつである。</p>
+
+    <!-- Section 5 -->
+    <h2 id="s5">5. 第五期（1990年代）— 批判的転回</h2>
+
+    <p>未来学は1990年代に入って、深刻な自己問い直しの時代を迎えた。冷戦の終結という「予測不可能な」大事件は、専門家たちに大きな衝撃を与えた。「なぜ誰も予期しなかったのか」という問いは、未来学の方法論への根本的な疑問に直結した。しかしこの「危機」は同時に、新しい知的地平を開く契機ともなった。それが「批判的未来学（Critical Futures Studies）」の台頭である。</p>
+
+    <p>オーストラリアのリチャード・スローターは、未来学の知識基盤を批判的に整理・体系化した研究者として傑出している。彼は未来学の「3層モデル」――問題解決・批判的/比較的・認識論的――を提唱し、多くの実践が問題解決の層に留まっていることを指摘した。スローターが1990年代を通じて構築した「フューチャーズ知識ベース（Futures Knowledge Base）」は、未来学の知的遺産を系統的にアーカイブする先駆的試みであり、分野全体の反省的知性を高める役割を果たした。</p>
+
+    <p>パキスタン系イギリス人研究者ジャヴァード・サルダールは、さらに鋭い批判を浴びせた。「使い古された未来（Used Futures）」という概念のもと、サルダールは未来学が往々にして西洋・男性・白人の価値観を「普遍的な未来」として提示してきた構造的な問題を糾弾した。彼が提唱した「ポストノーマル時代（Postnormal Times）」の概念は、複雑性・カオス・矛盾が交差する現代において、従来の「正常科学」のパラダイムでは対処できない問題群が増大していることを描き出した。サルダールの声は、未来学に哲学的・倫理的な厳格さを要求する重要なカウンターポイントとして機能した。</p>
+
+    <callout class="callout callout-person">
+      <h4>人物紹介：ソハイル・イナヤトゥッラー（1958–）</h4>
+      <p>パキスタン生まれ、オーストラリアを拠点とする未来学者。デルフィ大学・タムカン大学等で教える。因果階層分析（CLA: Causal Layered Analysis）の開発者として世界的に知られる。CLAは「リタニー（表層）→社会的原因→世界観・ディスコース→神話・メタファー」の4層に問題を掘り下げる分析枠組みであり、政府・企業・NGOで広く使われている。サルダールとともに、イスラム的・アジア的視点から西洋中心主義的な未来学を批判し、多元的な未来学の確立に貢献した。</p>
+    </callout>
+
+    <p>イナヤトゥッラーが1990年代に開発した「因果階層分析（CLA）」は、批判的未来学の代表的な方法論となった。CLAは問題の表層（メディアが報道する「リタニー」）から始まり、社会的・経済的原因、支配的な世界観・ディスコース、そして最も深層にある神話やメタファーへと掘り下げていく。このアプローチは、未来学が単に「将来の出来事を予測する」のではなく、「現在の前提を問い直すことで別の未来を可能にする」実践であることを明示した。CLAは今日、世界50カ国以上で教えられ、企業・政府・市民社会のあらゆる文脈で活用されている。</p>
+
+    <p>1990年代はまた、組織的な専門家ネットワークが成熟した時代でもあった。世界未来研究連盟（WFSF）や世界未来協会（WFS）が年次大会を通じて知識を共有し、アカデミック・ジャーナル『Futures』や『Technological Forecasting and Social Change』が査読論文を蓄積していった。学問分野としての制度的インフラが着実に整備されたこの時期、未来学は「生まれたばかりの知的ベンチャー」から「成熟した学際的分野」へと移行した。</p>
+
+    <!-- SECTION 6 -->
+    <h2 id="s6">6. 第六期（2000年代〜10年代）— デザイン、アンティシペーション、脱植民地化</h2>
+
+    <p>21世紀の最初の20年間は、未来学に三つの新しい潮流が合流した時代であった。デザイン思考との融合、認知科学・神経科学との対話、そして脱植民地的思想との衝突——この三つが重なり合って、未来学は従来の「予測と計画の科学」から「意味づくりと想像力の実践」へと、さらに大きく変容した。</p>
+
+    <p>ロンドンのロイヤル・カレッジ・オブ・アートを拠点とするアンソニー・ダンとフィオナ・ラービーは、「スペキュラティヴ・デザイン（Speculative Design）」という実践を打ち立てた。従来のデザインが現在の問題を解決することを目指すのに対し、スペキュラティヴ・デザインは「もしこうだったら（What if）」という問いを物質化することで、未来の可能性と危険性について社会的な対話を引き起こすことを目的とする。ダン&ラービーの2013年の著作『スペキュラティヴ・エヴリシング（Speculative Everything）』は、未来学とデザイン実践の境界を溶解させ、「未来は語られるだけでなく、見て触れることができるもの」という新しい感覚を広めた。</p>
+
+    <p>カナダ人研究者リエル・ミラーは、2000年代から10年代にかけてUNESCOの支援のもと「フューチャーズ・リテラシー（Futures Literacy）」の概念を発展させた。ミラーの核心的な洞察は、未来は予測されるべき「事実」ではなく、現在の行動や思考を方向づけるために「使われる」ものだという点にある。私たちが未来について想像するとき、その想像は未来についての「情報」であるよりも、今この瞬間の感情・判断・選択に影響を与える「道具」として機能している。この理解から出発するとき、未来学の目標は「正しく予測すること」ではなく「想像の質を高めること」に変わる。ミラーはこの枠組みをユネスコの「フューチャーズ・リテラシー・ラボ」として世界50カ国以上で実践した。</p>
+
+    <callout class="callout callout-case">
+      <h4>事例：デザインフューチャーズの日本への波及</h4>
+      <p>スペキュラティヴ・デザインの影響を受けた実践が、日本でも2010年代後半から増えてきた。NTTデータ、日立製作所、東京大学などが「プロトタイプとしての未来」を作成するプロジェクトを手がけ、デザイン系大学でも未来思考のカリキュラムが組まれるようになった。2025年の大阪・関西万博でも、複数のパビリオンがスペキュラティヴ・デザインの手法を取り入れた未来体験展示を行っており、1970年の「人類の進歩と調和」から半世紀を経て、未来の可視化をめぐる新しい実践が日本に根付きつつある。</p>
+    </callout>
+
+    <p>コロンビアの思想家アルトゥーロ・エスコバールは、「プルリバース（Pluriverse）」の概念を通じて、未来学の文明論的前提に挑戦した。「一つの世界に多くの世界が収まる（a world where many worlds fit）」というサパティスタの思想に着想を得たエスコバールの2018年の著作『プルリバースのためのデザイン（Designs for the Pluriverse）』は、「一つの未来」に向かって世界が収束していくという近代主義的前提そのものを問い直した。このアプローチは、先住民の未来観、アフリカンフューチャリズム、アジア的時間感覚といった多様な知の伝統が、単なる「多様性の飾り」としてではなく、未来の思索の根本的な材料として扱われるべきことを要求した。</p>
+
+    <p>デジタル技術の進展は、未来学の実践にも大きな変化をもたらした。インターネットによって大量の情報がリアルタイムで流通するようになると、環境スキャニングの規模と速度が飛躍的に向上した。人工知能の初期的応用として、テキスト分析・ネットワーク分析・機械学習が弱いシグナルの探知に使われ始めた。オンライン・デルファイ、ビジュアライゼーションツール、参加型プラットフォームが普及し、未来学の実践が少人数の専門家の手を離れ、より広い参加者を巻き込むことが技術的に可能になった。2010年代の未来学は、方法論においても技術的基盤においても、かつてないほど多様化した。</p>
+
+    <!-- SECTION 7 -->
+    <h2 id="s7">7. 第七期（2020年代）— AIと多元的危機の時代</h2>
+
+    <p>2020年に始まったCOVID-19のパンデミックは、未来学にとって一種の「試験」となった。多くの感染症専門家がパンデミックのリスクを長年警告していたにもかかわらず、ほとんどの政府と社会は準備ができていなかった。「弱いシグナル」が発せられ、専門家の知識が存在していたにもかかわらず、社会はその知識を行動に変えることができなかった。この経験は、未来学コミュニティに深刻な問いを突きつけた。「知ること」と「準備すること」の間の巨大な溝をいかに埋めるか——これが2020年代の未来学が向き合う実践的課題となった。</p>
+
+    <p>パンデミックと同時進行した、気候変動・地政学的緊張・技術変革・社会分断の複合危機は、思想家アダム・トゥーズが「ポリクライシス（polycrisis）」と呼んだ状況を生み出した。複数の危機が相互に連関し増幅し合う多元的危機の時代において、未来学の課題も変化した。単一の問題に焦点を当てた予測や計画ではなく、複数の危機が交差する複雑系の中での「強靭性（resilience）」と「適応能力（adaptive capacity）」をいかに高めるかが中心的な問いとなった。</p>
+
+    <p>生成AIの台頭は、未来学の実践に急速な変化をもたらしている。大規模言語モデルは、膨大なテキストデータからパターンを抽出し、シナリオの草稿を生成し、弱いシグナルを自動的にクラスタリングする能力を持つ。一部の未来学者たちは、AIが未来学の「ルーティン部分」を担うことで、人間の実践者がより深い思索と対話に集中できると期待している。しかし同時に、AIが学習するデータが過去に偏っていること、AIが「驚き」を生成することが本質的に困難であること、そして人間の想像力・共感・倫理的判断がAIでは代替できないことも強く認識されている。</p>
+
+    <callout class="callout callout-tip">
+      <h4>実践のヒント：未来学の歴史から学ぶ組織的知恵</h4>
+      <p>80年の未来学史は、一つの明確な教訓を繰り返している。未来への備えは「予測の精度」ではなく「思考の幅と深さ」によって決まる、ということだ。シェルが1973年の石油危機を乗り越えられたのは、正確な予測ができたからではない。「石油禁輸が起きたとき、私たちはどう行動するか」をあらかじめ思考し、その可能性をリーダーたちが内面化していたからである。あなたの組織で今日から始められることは、「最も起こりそうもない出来事が起きたとき」というシナリオを、真剣に、具体的に議論することかもしれない。</p>
+    </callout>
+
+    <p>フォーサイト能力の「民主化」も2020年代の顕著な潮流である。UNESCOのフューチャーズ・リテラシー・ネットワークは世界60カ国以上に拡大し、欧州委員会の「戦略的フォーサイト報告（Strategic Foresight Report）」は政策立案の中核に未来学を位置づけ、OECDはナショナル・フォーサイトの比較研究を系統化した。かつてはRANDや多国籍企業の特権的な知性であった未来学は、今や国家・市民社会・地域コミュニティが等しく実践すべき能力として認識されている。</p>
+
+    <p>日本でも、2020年代に入って未来学への関心が再び高まっている。内閣府の「ムーンショット型研究開発制度」、経済産業省の「未来の教室」、各自治体のビジョン策定プロセスへのフォーサイト手法の導入、そして民間シンクタンクや大学における未来学教育の復活が相次いでいる。1968年の日本未来学会創設以来、半世紀以上の沈黙を経て、日本の未来学が新しい形で息を吹き返しつつある。「失われた30年」の反省が、長期視野への渇望として結実しているとも言えるだろう。</p>
+
+    <!-- DIAGRAMS -->
+    <h2 id="diagram1">図1：未来学17学派の展開タイムライン</h2>
+
+    <figure class="figure">
+      <svg viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="未来学17学派タイムライン" style="width:100%;height:auto;">
+        <defs>
+          <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#F8F5F0"/>
+            <stop offset="100%" stop-color="#F0EBE0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Background -->
+        <rect width="720" height="520" fill="url(#bg-grad)" rx="8"/>
+
+        <!-- Title -->
+        <text x="360" y="28" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="13" font-weight="700" fill="#8B6914">未来学17学派の展開タイムライン（1940年代〜2020年代）</text>
+
+        <!-- Timeline axis -->
+        <line x1="60" y1="460" x2="700" y2="460" stroke="#C9A84C" stroke-width="2"/>
+
+        <!-- Decade markers -->
+        <g font-family="'Noto Sans JP', sans-serif" font-size="10" fill="#6B5C3E" text-anchor="middle">
+          <text x="70" y="478">1940s</text>
+          <text x="134" y="478">1950s</text>
+          <text x="198" y="478">1960s</text>
+          <text x="262" y="478">1970s</text>
+          <text x="326" y="478">1980s</text>
+          <text x="390" y="478">1990s</text>
+          <text x="454" y="478">2000s</text>
+          <text x="518" y="478">2010s</text>
+          <text x="582" y="478">2020s</text>
+        </g>
+
+        <!-- Decade tick marks -->
+        <g stroke="#C9A84C" stroke-width="1" opacity="0.5">
+          <line x1="70" y1="456" x2="70" y2="465"/>
+          <line x1="134" y1="456" x2="134" y2="465"/>
+          <line x1="198" y1="456" x2="198" y2="465"/>
+          <line x1="262" y1="456" x2="262" y2="465"/>
+          <line x1="326" y1="456" x2="326" y2="465"/>
+          <line x1="390" y1="456" x2="390" y2="465"/>
+          <line x1="454" y1="456" x2="454" y2="465"/>
+          <line x1="518" y1="456" x2="518" y2="465"/>
+          <line x1="582" y1="456" x2="582" y2="465"/>
+        </g>
+
+        <!-- Schools of thought — horizontal bars -->
+        <!-- Row layout: name label (left), bar (center), color by cluster -->
+
+        <!-- CLUSTER 1: Predictive (warm brown) -->
+        <text x="8" y="58" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#8B6914" font-weight="700">予測系</text>
+
+        <!-- Military/RAND Systems Analysis -->
+        <rect x="70" y="48" width="255" height="12" rx="3" fill="#8B6914" opacity="0.85"/>
+        <text x="328" y="58" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">軍事・RAND システム分析</text>
+
+        <!-- Delphi Method -->
+        <rect x="102" y="66" width="447" height="12" rx="3" fill="#A07820" opacity="0.75"/>
+        <text x="552" y="76" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">デルファイ法</text>
+
+        <!-- Technology Forecasting -->
+        <rect x="134" y="84" width="383" height="12" rx="3" fill="#B88C2A" opacity="0.7"/>
+        <text x="520" y="94" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">技術予測学派</text>
+
+        <!-- CLUSTER 2: Exploratory (warm gold) -->
+        <text x="8" y="118" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#C09020" font-weight="700">探索系</text>
+
+        <!-- La Prospective -->
+        <rect x="134" y="108" width="479" height="12" rx="3" fill="#D4A84B" opacity="0.85"/>
+        <text x="616" y="118" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">ラ・プロスペクティブ（仏）</text>
+
+        <!-- Scenario Planning Shell -->
+        <rect x="230" y="126" width="383" height="12" rx="3" fill="#C89838" opacity="0.8"/>
+        <text x="616" y="136" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">シナリオプランニング（シェル系）</text>
+
+        <!-- Evolutionary Futures Finland -->
+        <rect x="326" y="144" width="287" height="12" rx="3" fill="#B88C3C" opacity="0.75"/>
+        <text x="616" y="154" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">進化的未来（フィンランド）</text>
+
+        <!-- CLUSTER 3: Critical (earth green) -->
+        <text x="8" y="178" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#5C7C3A" font-weight="700">批判系</text>
+
+        <!-- Critical Futures Studies -->
+        <rect x="358" y="168" width="255" height="12" rx="3" fill="#5C7C3A" opacity="0.85"/>
+        <text x="616" y="178" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">批判的未来学</text>
+
+        <!-- Poststructuralist Futures -->
+        <rect x="390" y="186" width="223" height="12" rx="3" fill="#4E6B30" opacity="0.8"/>
+        <text x="616" y="196" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">ポスト構造主義的未来</text>
+
+        <!-- Decolonial Futures -->
+        <rect x="454" y="204" width="159" height="12" rx="3" fill="#3E5828" opacity="0.8"/>
+        <text x="616" y="214" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">脱植民地的未来</text>
+
+        <!-- CLUSTER 4: Constructive (teal) -->
+        <text x="8" y="238" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#2E7068" font-weight="700">構築系</text>
+
+        <!-- Participatory Foresight -->
+        <rect x="198" y="228" width="415" height="12" rx="3" fill="#3E8878" opacity="0.8"/>
+        <text x="616" y="238" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">参加型フォーサイト</text>
+
+        <!-- Design Futures -->
+        <rect x="422" y="246" width="191" height="12" rx="3" fill="#2E7068" opacity="0.85"/>
+        <text x="616" y="256" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">デザインフューチャーズ</text>
+
+        <!-- Futures Literacy -->
+        <rect x="454" y="264" width="159" height="12" rx="3" fill="#1E5858" opacity="0.85"/>
+        <text x="616" y="274" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">フューチャーズ・リテラシー</text>
+
+        <!-- CLUSTER 5: Integrative (purple) -->
+        <text x="8" y="298" font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#7050A0" font-weight="700">統合系</text>
+
+        <!-- Systems Dynamics -->
+        <rect x="198" y="288" width="415" height="12" rx="3" fill="#8060B0" opacity="0.75"/>
+        <text x="616" y="298" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">システムダイナミクス</text>
+
+        <!-- Integral Futures -->
+        <rect x="390" y="306" width="223" height="12" rx="3" fill="#7050A0" opacity="0.8"/>
+        <text x="616" y="316" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">インテグラル・フューチャーズ</text>
+
+        <!-- Postnormal Times -->
+        <rect x="422" y="324" width="191" height="12" rx="3" fill="#604890" opacity="0.8"/>
+        <text x="616" y="334" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">ポストノーマル時代</text>
+
+        <!-- AI Futures -->
+        <rect x="582" y="342" width="64" height="12" rx="3" fill="#402878" opacity="0.9"/>
+        <text x="648" y="352" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">AI未来学</text>
+
+        <!-- East Asian Tradition -->
+        <rect x="198" y="360" width="415" height="12" rx="3" fill="#C07830" opacity="0.65"/>
+        <text x="616" y="370" font-family="'Noto Sans JP', sans-serif" font-size="8.5" fill="#2C2416">東アジア・日本の未来思考</text>
+
+        <!-- Major events annotation -->
+        <g font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#8B6914" text-anchor="middle">
+          <text x="70" y="395">RAND</text>
+          <text x="70" y="404">設立</text>
+          <line x1="70" y1="408" x2="70" y2="455" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+          <text x="198" y="395">成長の</text>
+          <text x="198" y="404">限界</text>
+          <line x1="198" y1="408" x2="198" y2="455" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+          <text x="262" y="395">石油危機</text>
+          <text x="262" y="404">シェル</text>
+          <line x1="262" y1="408" x2="262" y2="455" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+          <text x="390" y="395">CLA</text>
+          <text x="390" y="404">開発</text>
+          <line x1="390" y1="408" x2="390" y2="455" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="3,2"/>
+
+          <text x="550" y="395">生成AI</text>
+          <text x="550" y="404">台頭</text>
+          <line x1="550" y1="408" x2="550" y2="455" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="3,2"/>
+        </g>
+
+        <!-- Legend -->
+        <g transform="translate(60, 490)">
+          <rect x="0" y="0" width="10" height="8" rx="2" fill="#8B6914"/>
+          <text x="14" y="8" font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#6B5C3E">予測系</text>
+          <rect x="58" y="0" width="10" height="8" rx="2" fill="#D4A84B"/>
+          <text x="72" y="8" font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#6B5C3E">探索系</text>
+          <rect x="116" y="0" width="10" height="8" rx="2" fill="#5C7C3A"/>
+          <text x="130" y="8" font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#6B5C3E">批判系</text>
+          <rect x="174" y="0" width="10" height="8" rx="2" fill="#3E8878"/>
+          <text x="188" y="8" font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#6B5C3E">構築系</text>
+          <rect x="232" y="0" width="10" height="8" rx="2" fill="#7050A0"/>
+          <text x="246" y="8" font-family="'Noto Sans JP', sans-serif" font-size="7.5" fill="#6B5C3E">統合系</text>
+        </g>
+      </svg>
+      <figcaption>図1：未来学17学派の系譜と時代展開（1940年代〜2020年代）。バーの長さは各学派の活発な活動期間を示す。</figcaption>
+    </figure>
+
+    <h2 id="diagram2">図2：世界の主要未来学機関の分布</h2>
+
+    <figure class="figure">
+      <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="世界の未来学機関分布" style="width:100%;height:auto;">
+        <!-- Simple world outline approximation using continents -->
+        <rect width="720" height="400" fill="#EBE6DC" rx="8"/>
+        <text x="360" y="24" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="13" font-weight="700" fill="#8B6914">世界の主要未来学機関・拠点（2025年時点）</text>
+
+        <!-- Ocean background -->
+        <rect x="20" y="34" width="680" height="330" rx="6" fill="#D4E8F0" opacity="0.6"/>
+
+        <!-- Continents - simplified polygons -->
+        <!-- North America -->
+        <path d="M80,80 L160,70 L180,90 L170,130 L150,160 L130,180 L100,190 L80,170 L70,140 L75,110 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+        <!-- Central America + Caribbean -->
+        <path d="M130,180 L150,185 L145,200 L130,210 L120,200 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.5"/>
+
+        <!-- South America -->
+        <path d="M140,220 L175,215 L190,240 L185,290 L170,320 L155,325 L140,310 L135,280 L140,260 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+
+        <!-- Europe -->
+        <path d="M290,60 L340,55 L355,70 L350,90 L330,100 L310,95 L295,85 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+        <!-- Scandinavia -->
+        <path d="M315,45 L335,40 L340,55 L320,60 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.5"/>
+
+        <!-- Africa -->
+        <path d="M295,100 L350,95 L370,110 L375,150 L370,200 L350,230 L325,235 L305,220 L295,190 L290,150 L290,120 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+
+        <!-- Middle East -->
+        <path d="M355,90 L395,88 L400,110 L385,125 L360,118 L352,105 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.8"/>
+
+        <!-- Asia -->
+        <path d="M395,55 L500,50 L540,65 L545,90 L530,115 L510,120 L480,110 L460,120 L440,115 L420,100 L405,90 L395,75 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+        <!-- South Asia -->
+        <path d="M460,118 L490,115 L495,140 L480,155 L460,148 L452,132 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.8"/>
+        <!-- Southeast Asia -->
+        <path d="M505,115 L535,112 L540,135 L520,145 L505,138 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.8"/>
+
+        <!-- Japan/Korea -->
+        <path d="M555,75 L570,72 L575,85 L565,95 L552,88 Z" fill="#C8B89A" stroke="#A09070" stroke-width="0.8"/>
+
+        <!-- Australia -->
+        <path d="M530,250 L600,245 L620,265 L615,300 L590,315 L560,310 L540,290 L530,270 Z" fill="#C8B89A" stroke="#A09070" stroke-width="1"/>
+
+        <!-- Institution markers with labels -->
+        <!-- RAND (Santa Monica, USA) -->
+        <circle cx="95" cy="125" r="10" fill="#8B6914" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="95" y="128.5" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#fff" font-weight="700">RAND</text>
+        <text x="95" y="148" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">米国・RAND</text>
+
+        <!-- Hawaii (Dator) -->
+        <circle cx="58" cy="165" r="7" fill="#A07820" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="58" y="168" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6" fill="#fff">HI</text>
+        <text x="45" y="183" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">ハワイ大学</text>
+
+        <!-- Paris (la prospective) -->
+        <circle cx="310" cy="78" r="9" fill="#C9A84C" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="310" y="81.5" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#fff" font-weight="700">Paris</text>
+        <text x="310" y="98" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">パリ（プロスペクティブ）</text>
+
+        <!-- Finland/Helsinki -->
+        <circle cx="348" cy="48" r="8" fill="#5C7C3A" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="348" y="51.5" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6.5" fill="#fff">FI</text>
+        <text x="348" y="40" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">フィンランド</text>
+
+        <!-- London (Sardar, Dunne&Raby) -->
+        <circle cx="298" cy="72" r="8" fill="#3E8878" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="298" y="75" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6" fill="#fff">LON</text>
+        <text x="285" y="90" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">ロンドン</text>
+
+        <!-- Singapore (CSF) -->
+        <circle cx="528" cy="138" r="8" fill="#7050A0" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="528" y="141" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6" fill="#fff">SG</text>
+        <text x="528" y="158" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">シンガポール</text>
+
+        <!-- Tokyo -->
+        <circle cx="563" cy="85" r="8" fill="#C07830" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="563" y="88" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6.5" fill="#fff">JP</text>
+        <text x="563" y="105" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">日本（NISTEP）</text>
+
+        <!-- UNESCO Paris -->
+        <circle cx="320" cy="72" r="6" fill="#2E7068" stroke="#fff" stroke-width="1" opacity="0.9"/>
+        <text x="320" y="75" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="5.5" fill="#fff">UN</text>
+
+        <!-- WFSF -->
+        <circle cx="335" cy="78" r="6" fill="#4E6B30" stroke="#fff" stroke-width="1" opacity="0.9"/>
+        <text x="335" y="81" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="5" fill="#fff">WFS</text>
+
+        <!-- Australia (Slaughter, Inayatullah) -->
+        <circle cx="568" cy="280" r="9" fill="#8B6914" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+        <text x="568" y="283" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="6" fill="#fff">AUS</text>
+        <text x="568" y="300" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">豪州（批判的未来学）</text>
+
+        <!-- GBN San Francisco -->
+        <circle cx="80" cy="108" r="7" fill="#B88C2A" stroke="#fff" stroke-width="1" opacity="0.9"/>
+        <text x="80" y="111" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="5.5" fill="#fff">GBN</text>
+        <text x="80" y="126" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">GBN/SF</text>
+
+        <!-- Colombia (Escobar region) -->
+        <circle cx="155" cy="230" r="7" fill="#3E5828" stroke="#fff" stroke-width="1" opacity="0.9"/>
+        <text x="155" y="233" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="5.5" fill="#fff">COL</text>
+        <text x="155" y="250" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="7" fill="#4A3510">コロンビア（脱植民地）</text>
+
+        <!-- Korea KAIST -->
+        <circle cx="550" cy="78" r="6" fill="#604890" stroke="#fff" stroke-width="1" opacity="0.9"/>
+        <text x="550" y="81" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="5.5" fill="#fff">KR</text>
+
+        <!-- Legend -->
+        <rect x="20" y="340" width="680" height="50" rx="4" fill="rgba(248,245,240,0.9)"/>
+        <text x="360" y="356" text-anchor="middle" font-family="'Noto Sans JP', sans-serif" font-size="9" font-weight="700" fill="#8B6914">凡例（機関規模：円の大きさ＝影響力の目安）</text>
+        <g font-family="'Noto Sans JP', sans-serif" font-size="8" fill="#6B5C3E">
+          <circle cx="50" cy="374" r="6" fill="#8B6914"/>
+          <text x="60" y="377">予測・システム系</text>
+          <circle cx="155" cy="374" r="6" fill="#C9A84C"/>
+          <text x="165" cy="374" y="377">シナリオ・プロスペクティブ系</text>
+          <circle cx="295" cy="374" r="6" fill="#5C7C3A"/>
+          <text x="305" y="377">批判的・脱植民地系</text>
+          <circle cx="430" cy="374" r="6" fill="#3E8878"/>
+          <text x="440" y="377">参加型・デザイン系</text>
+          <circle cx="545" cy="374" r="6" fill="#7050A0"/>
+          <text x="555" y="377">政府フォーサイト系</text>
+        </g>
+      </svg>
+      <figcaption>図2：世界の主要未来学機関・拠点の分布（2025年時点）。未来学は北大西洋圏から始まり、現在はアジア・太平洋・南米・アフリカへと拡大している。</figcaption>
+    </figure>
+
+  </article>
+
+  <!-- Chapter Summary -->
+  <div class="chapter-summary">
+    <h2>本章のまとめ</h2>
+    <ul>
+      <li>未来学は1940年代のRANDコーポレーションで生まれ、冷戦の軍事戦略から発展した。デルファイ法・システム分析・シナリオが原型手法として確立された。</li>
+      <li>ヨーロッパでは、フランスのラ・プロスペクティブ、ドイツのフュートゥロロジー、オーストリアの参加型未来など、哲学的・人間主義的な独自潮流が育まれた。</li>
+      <li>1960〜70年代の制度化期に、大学・学会・学術誌が整備され、トフラーの大衆化と『成長の限界』の科学的衝撃が未来学を公共的知性として確立した。</li>
+      <li>シェルのシナリオ革命（1973年）は、未来学をアカデミアから企業経営の実践へ転換させた決定的な出来事であった。</li>
+      <li>1990年代の批判的転回では、スローター・サルダール・イナヤトゥッラーらが西洋中心主義的な前提を問い直し、CLAなどの深層分析手法が開発された。</li>
+      <li>21世紀には、デザインフューチャーズ・フューチャーズ・リテラシー・脱植民地的未来という三つの潮流が合流し、未来学はさらに多元化した。</li>
+      <li>2020年代は、AIの台頭とポリクライシス（多元的危機）の時代であり、未来学はかつてない社会的需要と知的挑戦の双方に直面している。</li>
+    </ul>
+  </div>
+
+  <!-- References -->
+  <div class="references">
+    <h2>参考文献</h2>
+    <p>Bell, W. (1997). <em>Foundations of Futures Studies</em> (Vols. 1–2). Transaction Publishers.</p>
+    <p>Dator, J. (2019). <em>Jim Dator: A Noticer in Time</em>. Springer.</p>
+    <p>Escobar, A. (2018). <em>Designs for the Pluriverse</em>. Duke University Press.</p>
+    <p>Godet, M. (2006). <em>Creating Futures: Scenario Planning as a Strategic Management Tool</em>. Economica.</p>
+    <p>Inayatullah, S. (Ed.) (2004). <em>The Causal Layered Analysis Reader</em>. Tamkang University Press.</p>
+    <p>Meadows, D. H. et al. (1972). <em>The Limits to Growth</em>. Universe Books.</p>
+    <p>Miller, R. (Ed.) (2018). <em>Transforming the Future: Anticipation in the 21st Century</em>. Routledge/UNESCO.</p>
+    <p>Sardar, Z. (2013). <em>Future: All That Matters</em>. Hodder &amp; Stoughton.</p>
+    <p>Schwartz, P. (1991). <em>The Art of the Long View</em>. Doubleday.</p>
+    <p>Slaughter, R. (2005). <em>Futures for the Third Millennium</em>. Prospect Media.</p>
+    <p>Toffler, A. (1970). <em>Future Shock</em>. Random House.（訳: アルビン・トフラー『未来の衝撃』中公文庫）</p>
+    <p>van der Heijden, K. (2005). <em>Scenarios: The Art of Strategic Conversation</em> (2nd ed.). Wiley.</p>
+    <p>Wack, P. (1985). Scenarios: Uncharted Waters Ahead. <em>Harvard Business Review</em>, 63(5), 72–89.</p>
+    <p>梅棹忠夫（1967）『文明の生態史観』中公文庫。</p>
+    <p>林雄二郎・加藤秀俊（1968）『社会変動の中の未来学』日本評論社。</p>
+  </div>
+
+  <!-- Chapter Navigation -->
+  <nav class="chapter-nav">
+    <a href="ch01.html" class="nav-link">
+      <span>←</span>
+      <span>
+        <span class="nav-label">前章</span>
+        第1章: なぜ未来を考えるのか
+      </span>
+    </a>
+    <a href="ch03.html" class="nav-link nav-link-next">
+      <span>
+        <span class="nav-label">次章</span>
+        第3章: 未来は「予測」できるか
+      </span>
+      <span>→</span>
+    </a>
+  </nav>
+
+</div>
+
+<script>
+  function toggleDark() {
+    const body = document.body;
+    body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+  }
+</script>
+</body>
+</html>

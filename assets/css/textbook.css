@@ -1,0 +1,669 @@
+/* ==========================================================================
+   Futures Textbook — Miratuku CI Stylesheet
+   「未来を読む力 — 現代未来学の理論と実践」
+   NPO法人ミラツク
+   ========================================================================== */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* Miratuku CI Colors — warm earth tones */
+  --color-primary: #7A4033;        /* Deep brown (R122 G64 B51) */
+  --color-primary-light: #9B5B4A;
+  --color-primary-dark: #5C2E23;
+  --color-secondary: #F0A671;      /* Warm orange (R240 G166 B113) */
+  --color-secondary-light: #F5C49E;
+  --color-secondary-dark: #D4864D;
+  --color-accent: #5C7C3A;         /* Earth green */
+  --color-accent-light: #7A9E52;
+
+  /* Neutral palette */
+  --color-bg: #FAF7F3;
+  --color-bg-alt: #F3EDE5;
+  --color-surface: #FFFFFF;
+  --color-text: #2D2D2D;
+  --color-text-secondary: #5A5A5A;
+  --color-text-light: #8A8A8A;
+  --color-border: #DDD5CB;
+  --color-border-light: #EBE5DC;
+
+  /* Typography */
+  --font-body: 'Noto Serif JP', 'Georgia', serif;
+  --font-heading: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', 'Consolas', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Layout */
+  --max-width: 740px;
+  --content-padding: 1.5rem;
+}
+
+/* ---------- Dark Mode ---------- */
+[data-theme="dark"] {
+  --color-bg: #1A1714;
+  --color-bg-alt: #242018;
+  --color-surface: #2A251E;
+  --color-text: #E8E0D6;
+  --color-text-secondary: #B8AFA3;
+  --color-text-light: #8A8278;
+  --color-border: #3D362C;
+  --color-border-light: #332D24;
+  --color-primary: #D4864D;
+  --color-primary-light: #E0A06A;
+  --color-secondary: #F0A671;
+  --color-secondary-light: #F5C49E;
+  --color-accent: #7A9E52;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 2.0;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Layout ---------- */
+.page-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--content-padding);
+}
+
+.chapter-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--content-padding) var(--space-3xl);
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-lg);
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+/* ---------- Chapter Header ---------- */
+.chapter-header {
+  text-align: center;
+  padding: var(--space-3xl) 0;
+  margin-bottom: var(--space-2xl);
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.chapter-number {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-secondary-dark);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.chapter-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.chapter-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Epigraph / Opening Quote ---------- */
+.epigraph {
+  margin: var(--space-2xl) auto;
+  padding: var(--space-lg) var(--space-xl);
+  max-width: 600px;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  border-left: none;
+}
+
+.epigraph .attribution {
+  display: block;
+  margin-top: var(--space-sm);
+  font-style: normal;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* ---------- Pull Quote ---------- */
+.pull-quote {
+  margin: var(--space-2xl) calc(-1 * var(--space-xl));
+  padding: var(--space-xl) var(--space-2xl);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--color-primary);
+  border-left: 4px solid var(--color-secondary);
+  background-color: var(--color-bg-alt);
+}
+
+/* ---------- Sidebar / Callout Boxes ---------- */
+.callout {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: 4px;
+  background-color: var(--color-bg-alt);
+  border-left: 4px solid var(--color-secondary);
+}
+
+.callout-title {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Concept callout */
+.callout-concept {
+  border-left-color: var(--color-primary);
+}
+
+/* Case study callout */
+.callout-case {
+  border-left-color: var(--color-accent);
+  background-color: rgba(92, 124, 58, 0.06);
+}
+
+[data-theme="dark"] .callout-case {
+  background-color: rgba(92, 124, 58, 0.12);
+}
+
+/* Person / researcher callout */
+.callout-person {
+  border-left-color: var(--color-secondary-dark);
+}
+
+/* Practice hint callout */
+.callout-practice {
+  border-left-color: var(--color-accent);
+}
+
+/* ---------- Figures & Diagrams ---------- */
+figure {
+  margin: var(--space-2xl) 0;
+  text-align: center;
+}
+
+figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+  line-height: 1.6;
+}
+
+figcaption .fig-number {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* ---------- Tables ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-xl) 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+thead {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+thead th {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+}
+
+tbody td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--color-bg-alt);
+}
+
+tbody tr:hover {
+  background-color: rgba(240, 166, 113, 0.1);
+}
+
+/* ---------- Lists ---------- */
+ul, ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-xl);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+/* ---------- Links ---------- */
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-secondary-dark);
+}
+
+/* ---------- Footnotes ---------- */
+.footnote-ref {
+  font-size: 0.75rem;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.footnotes {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Navigation ---------- */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: var(--space-sm) var(--content-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+.nav-bar .book-title {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.nav-bar .nav-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.nav-bar .nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.nav-bar .nav-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ---------- Chapter Navigation ---------- */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-xl);
+  border-top: 2px solid var(--color-border);
+}
+
+.chapter-nav a {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.chapter-nav a:hover {
+  background-color: var(--color-bg-alt);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Dark Mode Toggle ---------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-heading);
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ---------- Cover Page ---------- */
+.cover-page {
+  text-align: center;
+  padding: var(--space-3xl) var(--content-padding);
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: var(--space-2xl);
+  opacity: 0.85;
+}
+
+.cover-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.cover-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3xl);
+}
+
+.cover-author {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-text-light);
+}
+
+/* ---------- Table of Contents ---------- */
+.toc {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--content-padding);
+}
+
+.toc h2 {
+  text-align: center;
+  border-bottom: none;
+  margin-bottom: var(--space-xl);
+}
+
+.toc-part {
+  margin-bottom: var(--space-2xl);
+}
+
+.toc-part-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.toc-chapter {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px dotted var(--color-border-light);
+}
+
+.toc-chapter a {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  text-decoration: none;
+  flex: 1;
+}
+
+.toc-chapter a:hover {
+  color: var(--color-primary);
+}
+
+.toc-chapter .toc-chars {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  white-space: nowrap;
+  margin-left: var(--space-md);
+}
+
+/* ---------- Chapter Summary Box ---------- */
+.chapter-summary {
+  margin: var(--space-2xl) 0;
+  padding: var(--space-xl);
+  background-color: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.chapter-summary h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+/* ---------- Further Reading ---------- */
+.further-reading {
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl);
+  background-color: var(--color-bg-alt);
+  border-radius: 4px;
+}
+
+.further-reading h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.further-reading ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.further-reading li {
+  padding: var(--space-xs) 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  :root {
+    --content-padding: 1rem;
+  }
+
+  .cover-title {
+    font-size: 1.75rem;
+  }
+
+  .chapter-title {
+    font-size: 1.75rem;
+  }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+
+  .pull-quote {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 1.1rem;
+  }
+
+  table {
+    font-size: 0.8125rem;
+  }
+}
+
+/* ---------- Print Styles (basic) ---------- */
+@media print {
+  .nav-bar,
+  .theme-toggle,
+  .btn-print,
+  .chapter-nav {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 10.5pt;
+    line-height: 1.8;
+  }
+
+  .chapter-content {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  h2 {
+    page-break-after: avoid;
+  }
+
+  figure {
+    page-break-inside: avoid;
+  }
+
+  .callout {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
