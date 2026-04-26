@@ -1,366 +1,281 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>第7章 システム思考とレバレッジポイント — 未来を読む力</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #8B6914;
-      --secondary: #D4A84B;
-      --accent: #5C7C3A;
-      --bg: #F8F5F0;
-      --bg-card: #FFFDF9;
-      --text: #2C2416;
-      --text-light: #6B5C3E;
-      --border: #E0D4B8;
-      --shadow: rgba(139, 105, 20, 0.08);
-      --chapter-num: #C9A84C;
-    }
-    [data-theme="dark"] {
-      --bg: #1A1710;
-      --bg-card: #231F17;
-      --text: #EDE8DC;
-      --text-light: #A89B7A;
-      --border: #3A3220;
-      --shadow: rgba(0,0,0,0.3);
-      --primary: #C9A84C;
-      --secondary: #8B6914;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Noto Serif JP', 'Georgia', serif;
-      background-color: var(--bg);
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.95;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .site-header {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.6rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-    }
-    .site-header a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    .site-header a:hover { color: #fff; }
-    .header-right { display: flex; gap: 1rem; align-items: center; }
-    .controls { display: flex; gap: 0.5rem; align-items: center; }
-    .btn {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.78rem;
-      font-family: 'Noto Sans JP', sans-serif;
-      transition: background 0.2s;
-    }
-    .btn:hover { background: rgba(255,255,255,0.25); }
-
-    .chapter-hero {
-      background: linear-gradient(135deg, #1E3A2A 0%, #2E5A3A 45%, #3A6A48 100%);
-      color: #fff;
-      padding: 4rem 2rem 3.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .chapter-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='30'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Ccircle cx='40' cy='40' r='10'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    .chapter-label {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: var(--secondary);
-      margin-bottom: 1rem;
-    }
-    .chapter-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 0.75rem;
-    }
-    .chapter-subtitle {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.05em;
-    }
-    .chapter-epigraph {
-      max-width: 560px;
-      margin: 2.5rem auto 0;
-      font-style: italic;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      border-left: 3px solid var(--secondary);
-      padding-left: 1.25rem;
-      text-align: left;
-    }
-    .chapter-epigraph cite {
-      display: block;
-      margin-top: 0.5rem;
-      font-style: normal;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.6);
-      font-family: 'Noto Sans JP', sans-serif;
-    }
-
-    .page-wrapper {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 3rem 2rem 5rem;
-    }
-
-    .toc {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--primary);
-      border-radius: 0 8px 8px 0;
-      padding: 1.75rem 2rem;
-      margin-bottom: 3.5rem;
-    }
-    .toc h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--primary);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .toc ol { padding-left: 1.2rem; }
-    .toc li {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text-light);
-      margin-bottom: 0.4rem;
-      line-height: 1.5;
-    }
-    .toc a { color: var(--text-light); text-decoration: none; transition: color 0.2s; }
-    .toc a:hover { color: var(--primary); }
-
-    .prose h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-top: 3.5rem;
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 2px solid var(--border);
-      scroll-margin-top: 4rem;
-    }
-    .prose h3 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-      scroll-margin-top: 4rem;
-    }
-    .prose p {
-      margin-bottom: 1.4em;
-      text-align: justify;
-      hyphens: auto;
-    }
-    .prose p:first-of-type::first-letter {
-      font-size: 3.2em;
-      float: left;
-      line-height: 0.78;
-      margin-right: 0.1em;
-      margin-top: 0.08em;
-      color: var(--primary);
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 700;
-    }
-
-    .figure {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem 1.5rem 1.5rem;
-      margin: 2.5rem 0;
-      overflow-x: auto;
-    }
-    .figure figcaption {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.82rem;
-      color: var(--text-light);
-      margin-top: 1rem;
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .callout {
-      border-radius: 6px;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.75;
-    }
-    .callout-person {
-      background: linear-gradient(135deg, rgba(139,105,20,0.07) 0%, rgba(212,168,75,0.05) 100%);
-      border-left: 4px solid var(--secondary);
-    }
-    .callout-case {
-      background: linear-gradient(135deg, rgba(92,124,58,0.07) 0%, rgba(92,124,58,0.03) 100%);
-      border-left: 4px solid var(--accent);
-    }
-    .callout-tip {
-      background: rgba(139,105,20,0.05);
-      border: 1px dashed var(--secondary);
-    }
-    .callout-key {
-      background: linear-gradient(135deg, rgba(62,136,120,0.08) 0%, rgba(46,112,104,0.04) 100%);
-      border-left: 4px solid #3E8878;
-    }
-    .callout h4 {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .callout-person h4 { color: var(--primary); }
-    .callout-case h4 { color: var(--accent); }
-    .callout-tip h4 { color: var(--primary); }
-    .callout-key h4 { color: #3E8878; }
-    .callout p { margin-bottom: 0.6em; }
-    .callout p:last-child { margin-bottom: 0; }
-
-    .chapter-summary {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: 0 0 8px 8px;
-      padding: 2rem;
-      margin-top: 4rem;
-    }
-    .chapter-summary h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      border: none;
-      padding: 0;
-    }
-    .chapter-summary ul { padding-left: 1.2rem; }
-    .chapter-summary li {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-    }
-
-    .references {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    .references h2 {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 1rem;
-      border: none;
-      padding: 0;
-    }
-    .references p {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-bottom: 0.4em;
-      font-family: 'Noto Sans JP', sans-serif;
-    }
-
-    .chapter-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      gap: 1rem;
-    }
-    .nav-link {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 0.85rem;
-      color: var(--primary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: all 0.2s;
-      max-width: 45%;
-    }
-    .nav-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .nav-link-next { margin-left: auto; text-align: right; }
-    .nav-label { font-size: 0.7rem; color: var(--text-light); display: block; margin-bottom: 0.15rem; }
-    .nav-link:hover .nav-label { color: rgba(255,255,255,0.7); }
-
-    @media print {
-      .site-header, .controls, .chapter-nav, .toc, .btn { display: none !important; }
-      body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.8; }
-      .chapter-hero { background: #333; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .page-wrapper { max-width: 100%; padding: 1cm 0; }
-      .prose h2 { page-break-after: avoid; margin-top: 2rem; }
-      .prose p { orphans: 3; widows: 3; }
-      .figure { page-break-inside: avoid; border: 1px solid #ccc; }
-      .callout { page-break-inside: avoid; }
-      @page { size: A4; margin: 25mm 20mm; }
-    }
-
-    @media (max-width: 600px) {
-      .page-wrapper { padding: 2rem 1.25rem 4rem; }
-      .chapter-hero { padding: 3rem 1.25rem 2.5rem; }
-      .chapter-nav { flex-direction: column; }
-      .nav-link { max-width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7章 システム思考とレバレッジポイント | 未来を読む力</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-alt: #FAFAF8;
+  --card: #FFFFFF;
+  --text: #121212;
+  --text-secondary: #555555;
+  --text-muted: #6B6B6B;
+  --border: #D9D9D9;
+  --border-light: #EEEEEE;
+  --surface: #F7F7F5;
+  --accent: #CC1400;
+  --accent-muted: rgba(204,20,0,0.06);
+  --accent-blue: #1565c0;
+  --accent-green: #2e7d32;
+  --accent-orange: #e65100;
+  --serif: 'Noto Serif JP', serif;
+  --sans: 'Noto Sans JP', sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #0D0D0D;
+  --bg-alt: #141414;
+  --card: #1A1A1A;
+  --text: #E0E0E0;
+  --text-secondary: #AAAAAA;
+  --text-muted: #777777;
+  --border: #333333;
+  --border-light: #222222;
+  --surface: #1E1E1E;
+  --accent: #FF4444;
+  --accent-muted: rgba(255,68,68,0.08);
+  --accent-blue: #64b5f6;
+  --accent-green: #66bb6a;
+  --accent-orange: #ffb74d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+.theme-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 100;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.print-btn {
+  position: fixed; top: 16px; right: 60px; z-index: 100;
+  padding: 6px 14px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; font-size: 0.72rem; color: var(--text-muted);
+  font-family: var(--sans);
+}
+.report-header {
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border-light);
+  padding: 48px 24px 40px;
+}
+.report-header-inner {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.report-back {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.report-back:hover { color: var(--accent); }
+.report-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.report-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.report-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+.report-title {
+  font-family: var(--serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.report-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 640px;
+}
+.article {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+.section-num {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+h2.article-h2 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 56px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+h2.article-h2:first-of-type { margin-top: 0; }
+h3.article-h3 {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 40px 0 14px;
+}
+.article p {
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  text-align: justify;
+}
+.pullquote {
+  margin: 32px 0;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-muted);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin: 20px 0;
+}
+.data-table th {
+  background: var(--surface);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+.data-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.data-table tr:hover td { background: var(--accent-muted); }
+.insight-box {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--accent-orange);
+  background: rgba(230,81,0,0.03);
+}
+[data-theme="dark"] .insight-box { background: rgba(255,183,77,0.04); }
+.insight-label {
+  font-family: var(--serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  margin-bottom: 8px;
+}
+.callout, .callout-concept, .callout-case, .callout-person, .callout-practice {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--accent-blue);
+  background: rgba(21,101,192,0.04);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.callout-title, .callout h4 {
+  font-family: var(--serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 8px;
+}
+.chapter-nav {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.chapter-nav a {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.chapter-nav a:hover {
+  background: var(--accent-muted);
+  border-color: var(--accent);
+}
+.report-footer {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  border-top: 1px solid var(--border);
+}
+.report-footer p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 16px;
+}
+svg { max-width: 100%; height: auto; }
+@media print {
+  .theme-toggle, .print-btn, .chapter-nav, .report-back { display: none; }
+  body { font-size: 10pt; line-height: 1.6; }
+  .report-header { padding: 24px; }
+  .article { padding: 24px; }
+  h2.article-h2 { page-break-after: avoid; }
+  .pullquote, .insight-box, .callout, svg { page-break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  .report-title { font-size: 1.3rem; }
+  .chapter-nav { flex-direction: column; }
+}
+</style>
 </head>
-<body data-theme="light">
+<body>
+<button class="theme-toggle" onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'':'dark'" aria-label="テーマ切替">&#9681;</button>
+<button class="print-btn" onclick="window.print()">Print / PDF</button>
 
-<header class="site-header">
-  <a href="../index.html">未来を読む力 — 現代未来学の理論と実践</a>
-  <div class="header-right">
-    <div class="controls">
-      <button class="btn" onclick="toggleDark()">ダーク切替</button>
-      <button class="btn" onclick="window.print()">印刷 / PDF</button>
-    </div>
-  </div>
+<header class="report-header">
+<div class="report-header-inner">
+<a href="https://yuyanishimura0312.github.io/miratuku-news-v2/textbook.html" class="report-back">&larr; 未来を読む力 — 目次</a>
+<div class="report-meta-top">
+<span class="report-badge">TEXTBOOK</span>
+<span class="report-date">Part II 未来を探る手法</span>
+</div>
+<h1 class="report-title">第7章 システム思考とレバレッジポイント</h1>
+<p class="report-subtitle">複雑さを理解する</p>
+</div>
 </header>
 
+<div class="article">
 <div class="chapter-hero">
   <div class="chapter-label">Chapter 7 &nbsp;|&nbsp; Part II: 未来を探る手法</div>
   <h1 class="chapter-title">システム思考とレバレッジポイント</h1>
@@ -859,30 +774,20 @@
   </div>
 
   <!-- Chapter Navigation -->
-  <nav class="chapter-nav">
-    <a href="ch06.html" class="nav-link">
-      <span>←</span>
-      <span>
-        <span class="nav-label">前章</span>
-        第6章: デルファイ法と集合知
-      </span>
-    </a>
-    <a href="ch08.html" class="nav-link nav-link-next">
-      <span>
-        <span class="nav-label">次章</span>
-        第8章: 因果階層分析（CLA）
-      </span>
-      <span>→</span>
-    </a>
-  </nav>
+  
 
 </div>
+</div>
 
-<script>
-  function toggleDark() {
-    const body = document.body;
-    body.dataset.theme = body.dataset.theme === 'dark' ? 'light' : 'dark';
-  }
-</script>
+<div class="chapter-nav">
+<a href="ch06.html">&larr; デルファイ法と集合知</a>
+<a href="ch08.html">因果階層分析（CLA） &rarr;</a>
+</div>
+
+<footer class="report-footer">
+<p>「未来を読む力 — 現代未来学の理論と実践」NPO法人ミラツク 編<br>
+Futures Studies Knowledge DB（448研究者・99手法・507概念）に基づく</p>
+</footer>
+
 </body>
 </html>
