@@ -1,831 +1,341 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第1章: なぜ未来を考えるのか — 不確実な時代の航海術 | 未来を拓く力</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ============================================
-           Miratuku CI Palette — Warm Earth Tones
-           ============================================ */
-        :root {
-            --color-primary: #8B6914;
-            --color-primary-light: #A07D2A;
-            --color-secondary: #D4A84B;
-            --color-accent: #5C7C3A;
-            --color-accent-light: #7A9F56;
-            --color-bg: #F8F5F0;
-            --color-bg-alt: #F0EBE3;
-            --color-text: #333333;
-            --color-text-light: #666666;
-            --color-text-muted: #999999;
-            --color-border: #D4CBC0;
-            --color-link: #8B6914;
-            --color-box-bg: #FAF7F2;
-            --color-box-border: #E8DFD2;
-            --font-body: 'Noto Serif JP', 'Georgia', serif;
-            --font-heading: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
-            --max-width: 720px;
-            --line-height: 1.9;
-        }
-
-        /* Dark mode */
-        [data-theme="dark"] {
-            --color-bg: #1A1814;
-            --color-bg-alt: #242018;
-            --color-text: #E8E0D4;
-            --color-text-light: #B8AE9E;
-            --color-text-muted: #7A7060;
-            --color-border: #3A342A;
-            --color-box-bg: #222018;
-            --color-box-border: #3A342A;
-            --color-primary: #D4A84B;
-            --color-primary-light: #E0BC6A;
-            --color-link: #D4A84B;
-        }
-
-        /* ============================================
-           Base
-           ============================================ */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--color-text);
-            background: var(--color-bg);
-            line-height: var(--line-height);
-            -webkit-font-smoothing: antialiased;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        /* ============================================
-           Header
-           ============================================ */
-        .site-header {
-            border-bottom: 1px solid var(--color-border);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .site-header__left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .site-header__logo {
-            height: 36px;
-            width: auto;
-        }
-
-        .site-header__title {
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-            letter-spacing: 0.05em;
-        }
-
-        .site-header__nav {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .site-header__nav a {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            color: var(--color-text-light);
-            text-decoration: none;
-        }
-
-        .site-header__nav a:hover {
-            color: var(--color-primary);
-        }
-
-        /* Dark mode toggle */
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            padding: 4px 10px;
-            cursor: pointer;
-            font-family: var(--font-heading);
-            font-size: 0.75rem;
-            color: var(--color-text-light);
-            transition: border-color 0.2s;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-        }
-
-        /* ============================================
-           Chapter
-           ============================================ */
-        .chapter {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 60px 24px 120px;
-        }
-
-        .chapter__part-label {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            color: var(--color-primary);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .chapter__number {
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 8px;
-        }
-
-        .chapter__title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-text);
-            line-height: 1.4;
-            margin-bottom: 8px;
-        }
-
-        .chapter__subtitle {
-            font-family: var(--font-heading);
-            font-size: 1.15rem;
-            font-weight: 400;
-            color: var(--color-text-light);
-            margin-bottom: 40px;
-        }
-
-        .chapter__epigraph {
-            border-left: 3px solid var(--color-secondary);
-            padding: 16px 24px;
-            margin-bottom: 48px;
-            background: var(--color-box-bg);
-        }
-
-        .chapter__epigraph p {
-            font-style: italic;
-            color: var(--color-text-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .chapter__epigraph cite {
-            display: block;
-            margin-top: 8px;
-            font-style: normal;
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-        }
-
-        /* ============================================
-           Typography
-           ============================================ */
-        .chapter h2 {
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin: 56px 0 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--color-secondary);
-        }
-
-        .chapter h3 {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            margin: 40px 0 16px;
-        }
-
-        .chapter p {
-            margin-bottom: 20px;
-            text-align: justify;
-            text-indent: 1em;
-        }
-
-        .chapter p.no-indent {
-            text-indent: 0;
-        }
-
-        .chapter a {
-            color: var(--color-link);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        .chapter strong {
-            font-weight: 600;
-        }
-
-        .chapter em {
-            font-style: italic;
-        }
-
-        /* ============================================
-           Info Box (column / case study)
-           ============================================ */
-        .info-box {
-            background: var(--color-box-bg);
-            border: 1px solid var(--color-box-border);
-            border-radius: 6px;
-            padding: 24px 28px;
-            margin: 32px 0;
-        }
-
-        .info-box--accent {
-            border-left: 4px solid var(--color-accent);
-        }
-
-        .info-box--primary {
-            border-left: 4px solid var(--color-primary);
-        }
-
-        .info-box__label {
-            font-family: var(--font-heading);
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--color-accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .info-box--primary .info-box__label {
-            color: var(--color-primary);
-        }
-
-        .info-box__title {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .info-box p {
-            font-size: 0.92rem;
-            margin-bottom: 12px;
-            text-indent: 0;
-        }
-
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ============================================
-           SVG Diagram
-           ============================================ */
-        .diagram {
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .diagram svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .diagram__caption {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-            margin-top: 12px;
-        }
-
-        /* ============================================
-           Chapter Footer
-           ============================================ */
-        .chapter__references {
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .chapter__references h2 {
-            font-size: 1.1rem;
-            border-bottom: none;
-            margin-top: 0;
-        }
-
-        .chapter__references ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .chapter__references li {
-            font-size: 0.88rem;
-            color: var(--color-text-light);
-            margin-bottom: 8px;
-            padding-left: 1.5em;
-            text-indent: -1.5em;
-        }
-
-        .chapter__nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .chapter__nav a {
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-
-        .chapter__nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* ============================================
-           Comparison Table
-           ============================================ */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 32px 0;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 12px 16px;
-            border: 1px solid var(--color-border);
-            text-align: left;
-        }
-
-        .comparison-table th {
-            background: var(--color-bg-alt);
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--color-primary);
-        }
-
-        .comparison-table td {
-            vertical-align: top;
-        }
-
-        /* ============================================
-           Footer
-           ============================================ */
-        .site-footer {
-            border-top: 1px solid var(--color-border);
-            padding: 24px;
-            text-align: center;
-            font-family: var(--font-heading);
-            font-size: 0.75rem;
-            color: var(--color-text-muted);
-        }
-
-        /* ============================================
-           Print Styles (A4 PDF)
-           ============================================ */
-        @media print {
-            @page {
-                size: A4;
-                margin: 25mm 20mm;
-            }
-
-            body {
-                font-size: 10.5pt;
-                color: #000;
-                background: #fff;
-            }
-
-            .site-header,
-            .site-footer,
-            .theme-toggle,
-            .chapter__nav {
-                display: none;
-            }
-
-            .chapter {
-                padding: 0;
-                max-width: 100%;
-            }
-
-            .chapter h2 {
-                page-break-after: avoid;
-            }
-
-            .info-box {
-                page-break-inside: avoid;
-            }
-
-            .diagram {
-                page-break-inside: avoid;
-            }
-
-            a {
-                color: #000;
-                text-decoration: none;
-            }
-
-            @top-center {
-                content: "未来を拓く力 — 第1章";
-            }
-
-            @bottom-center {
-                content: counter(page);
-            }
-        }
-
-        /* ============================================
-           Responsive
-           ============================================ */
-        @media (max-width: 600px) {
-            .chapter__title {
-                font-size: 1.5rem;
-            }
-
-            .chapter__subtitle {
-                font-size: 1rem;
-            }
-
-            .site-header {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1章: なぜ未来を考えるのか | 未来を読む力</title>
+  <link rel="stylesheet" href="../assets/css/textbook.css">
+  <link rel="stylesheet" href="../assets/css/print.css" media="print">
 </head>
 <body>
 
-<!-- Header -->
-<header class="site-header">
-    <div class="site-header__left">
-        <img src="../assets/miratuku-logo.png" alt="NPO法人ミラツク" class="site-header__logo">
-        <span class="site-header__title">未来を拓く力 — フューチャーズ・スタディーズ入門</span>
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <a href="../index.html" class="book-title">未来を読む力</a>
+    <div class="nav-links">
+      <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()">Dark</button>
+      <button class="btn btn-print" onclick="window.print()">Print / PDF</button>
     </div>
-    <nav class="site-header__nav">
-        <a href="../index.html">目次</a>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="テーマ切替">明/暗</button>
-    </nav>
-</header>
+  </nav>
 
-<!-- Chapter Content -->
-<article class="chapter">
+  <article class="chapter-content">
 
-    <div class="chapter__part-label">Part I: 未来学とは何か</div>
-    <div class="chapter__number">第1章</div>
-    <h1 class="chapter__title">なぜ未来を考えるのか</h1>
-    <p class="chapter__subtitle">不確実な時代の航海術</p>
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+      <span class="chapter-number">Chapter 01</span>
+      <h1 class="chapter-title">なぜ未来を考えるのか</h1>
+      <p class="chapter-subtitle">不確実な時代の航海術</p>
+    </header>
 
-    <div class="chapter__epigraph">
-        <p>未来は予測するものではない。未来は創るものである。</p>
-        <cite>— ピーター・ドラッカー</cite>
-    </div>
-
-    <!-- ===== Section 1 ===== -->
-    <h2>1-1. 石油危機を予見した人々</h2>
-
-    <p>1972年、世界はまだ安定した成長の只中にあった。先進国の経済は順調に拡大し、安価な石油が産業と日常生活の基盤を支えていた。翌年に世界を震撼させる石油危機を予測した人間は、ごくわずかだった。しかし、その「ごくわずか」のなかに、オランダの石油大手ロイヤル・ダッチ・シェルのシナリオチームがいた。</p>
-
-    <p>シェルのシナリオチームを率いていたのは、フランス出身のピエール・ワック（Pierre Wack）である。ワックは従来の経営企画部門とはまったく異なるアプローチをとっていた。単一の予測を精緻化するのではなく、「複数の未来の物語」を描き、そのなかで何が起こりうるかを探求する手法 ——「シナリオプランニング」—— を実践していたのである。</p>
-
-    <p>ワックのチームは、中東の地政学的動向、OPECの交渉力の変化、エネルギー需要の構造的変化を分析し、石油価格が急騰する世界のシナリオを描いていた。重要なのは、それが「当たった」ことではない。シェルの経営陣がそのシナリオに基づいて「心の準備」をしていたことである。石油危機が実際に起こったとき、シェルは競合他社よりも遥かに迅速に対応できた。他の石油メジャーが危機への対応に翻弄されるなか、シェルは世界第7位の石油会社から第2位へと躍進した。</p>
-
-    <p>この出来事は、20世紀後半のビジネス史における最も印象的なエピソードの一つとして語り継がれている。しかし、ここから学ぶべき本質は、シェルが石油危機を「予測した」ということではない。ワック自身が繰り返し強調したように、シナリオプランニングの目的は未来を予測することではなく、「意思決定者の世界の見方（mental model）を変えること」にある。シェルの経営陣は、シナリオを通じて「石油が安価であり続ける」という暗黙の前提を問い直し、異なる世界に備える思考の柔軟性を獲得していたのである。</p>
-
-    <div class="info-box info-box--primary">
-        <div class="info-box__label">人物紹介</div>
-        <p class="info-box__title">ピエール・ワック（Pierre Wack, 1922-1997）</p>
-        <p>フランス生まれ。ロイヤル・ダッチ・シェルのグループ・プランニング部門で1970年代にシナリオプランニングを確立した。東洋哲学への深い造詣を持ち、シナリオの本質を「心の変容」と位置づけた。1985年のHarvard Business Review論文「Scenarios: Uncharted Waters Ahead」は、シナリオプランニングの古典的テキストとして今も読み継がれている。</p>
+    <!-- Epigraph -->
+    <div class="epigraph">
+      「未来は予測できない。なぜなら、未来はまだ存在しないからだ。」
+      <span class="attribution">— Jim Dator, ハワイ大学マノア校未来学研究センター</span>
     </div>
 
-    <p>一方、地球の反対側では、もう一つの注目すべき実践が展開されていた。北欧の小国フィンランドは、1990年代に深刻な経済危機を経験した後、国家レベルでのフォーサイト（foresight: 先見的な未来思考）を制度化するという大胆な選択をした。フィンランド議会は1993年に世界で唯一の「未来委員会（Committee for the Future）」を常設し、すべての主要な政策領域について長期的な未来展望を検討する仕組みを構築した。</p>
+    <!-- Section 1: Opening Story -->
+    <h2>嵐の前の静けさ — シェルが見た未来</h2>
 
-    <p>フィンランドの選択は偶然ではない。人口わずか550万人の小国が、ノキアの興亡、ロシアとの複雑な関係、EU加盟と通貨統合、デジタル変革と教育改革といった激動の30年を乗り越え、世界でもっとも革新的でレジリエントな社会の一つであり続けているのは、国家フォーサイトの継続的な実践と無関係ではない。フィンランドでは、首相が就任直後に「将来報告（Government Report on the Future）」を議会に提出することが慣例となっており、未来について体系的に考えることが政治文化の一部となっている。</p>
+    <p>一九七一年、ロンドン。ロイヤル・ダッチ・シェルの本社ビルの一室で、フランス人プランナーのピエール・ワックは、ある不穏な可能性について考えていた。中東の石油産出国が、原油価格を武器として使う日が来るのではないか。当時、石油業界の常識では原油価格は安定的に推移するものとされていた。一バレルあたり数ドルという価格は、まるで自然法則のように疑われることがなかった。だがワックの目には、その「常識」こそが危うく映っていた。</p>
 
-    <p>シェルのシナリオチームとフィンランドの未来委員会。この二つの事例は、企業と国家というまったく異なるスケールにおいて、同じことを示している。すなわち、<strong>未来について体系的に考える力を持つ組織は、そうでない組織に比べて、不確実性に対してはるかに強靭である</strong>ということだ。</p>
+    <p>ワックはシェルの経営陣に対して、複数の「シナリオ」を提示した。一つは、従来通り石油価格が安定する世界。もう一つは、産油国が供給を制限し、価格が急騰する世界。重要なのは、ワックがどちらの未来が「正しい」かを主張しなかったことだ。彼は両方の世界を、等しくリアルに、等しく詳細に描き出した。そして経営陣に問いかけた。「もしこの世界が現実になったとしたら、われわれは何をすべきか？」</p>
 
-    <!-- ===== Section 2 ===== -->
-    <h2>1-2. なぜ今、未来を考えるのか</h2>
+    <p>一九七三年十月、第四次中東戦争が勃発し、アラブ石油輸出国機構（OAPEC）は石油の禁輸措置を発動した。原油価格は三カ月で四倍に跳ね上がった。世界���済は混乱に陥り、多くの石油企業が対応��追われた。だがシェルは違った。すでに複数のシナリオを検討していたシェルの経営陣は、「価格急騰の��界」への対応策をあらかじめ考え抜いていた。投���ポ���トフォリオの分散、代替エネル��ー源の探索、精製能力の柔軟な配置転換。石油危機を経て、シェルは石油メジャーの中で業界七位から二位へと劇的に躍進した。</p>
 
-    <p>「未来を考える」と言うと、多くの人は「そんな暇があるなら目の前の仕事を片付けたい」と感じるかもしれない。日々の業務に追われるビジネスパーソンにとって、未来について考えることは贅沢に思えるだろう。しかし、逆説的なことに、<strong>目の前の仕事に追われている人こそ、未来について考える必要がある</strong>。</p>
+    <p>この事例が特に注目に値するのは、ワックのチームが何をしなかったか、という点だ。彼らは「石油危機が起こる確率は何パーセントか」という問いには答えなかった。代わりに、「もし起こったら世界はどう変わるか」「そのとき自分たちはどう行動す��きか」という問いを立てた。確率ではなく可能性、推定ではなく準備。この姿勢こそが、予測（Forecasting）とフォーサイト（Foresight）の本質的な違いであり、本書を通じて繰り返し立ち戻ることになるテーマである。</p>
 
-    <p>なぜか。それは、私たちが日々行っている意思決定のほとんどが、実は暗黙の未来像に基づいているからである。新しい事業に投資するかどうか。どの技術を採用するか。どんな人材を採用するか。こうした意思決定はすべて、「この先、世界はこうなるだろう」という仮定の上に成り立っている。しかし、その仮定は多くの場合、意識的に検証されることがない。</p>
+    <p>この物語は、未来を「当てた」成功譚ではない。ワックが石油危機を予言したわけではなかった。彼がしたのは、経営陣の思考の枠組みそのものを変えることだった。「一つの未来」から「複数の未来」へ。「予測する」から「備える」へ。この発想の転換こそが、本書が扱う「未来学」の核心である。</p>
 
-    <p>たとえば、2019年末に2020年の事業計画を策定した企業のほとんどは、「世界的なパンデミックが経済活動を数ヶ月にわたって停止させる」というシナリオを考慮していなかった。COVID-19のパンデミックは、私たちの未来に対する暗黙の仮定がいかに脆弱であるかを、痛烈に示した出来事である。</p>
-
-    <p>しかし、パンデミックを「予測できなかった」ことが問題なのではない。問題は、私たちの多くが「根本的に異なる世界」の可能性について体系的に考える習慣を持っていなかったことにある。これは個人の能力の問題ではなく、組織と社会のリテラシーの問題である。</p>
-
-    <p>近年、ビジネスの文脈では「VUCA」（Volatility, Uncertainty, Complexity, Ambiguity）という概念が広く使われるようになった。世界は不安定で（Volatile）、不確実で（Uncertain）、複雑で（Complex）、曖昧である（Ambiguous）。この認識自体は重要だが、VUCAは「問題の記述」であって「解決策」ではない。世界がVUCAであることを嘆くだけでは、不確実性への対処能力は高まらない。</p>
-
-    <p>必要なのは、不確実性を前提として受け入れた上で、複数の可能性を探索し、組織の適応力を高めるための体系的なアプローチである。それこそが、本書で扱う「未来学（Futures Studies）」、そしてその実践的応用である「フォーサイト（Foresight）」が提供するものだ。</p>
-
-    <p>ここで一つ、日本のビジネスに身近な例を考えてみよう。2010年代前半、日本の自動車産業にとって「電気自動車（EV）が急速に主流化する」というシナリオは、まだ「極端な見方」とされていた。ハイブリッド技術で世界をリードしていた日本メーカーの多くは、内燃機関からEVへの移行は緩やかに進むと想定していた。しかし、2015年のパリ協定、2017年のフランスと英国のガソリン車販売禁止宣言、テスラの急成長、中国のEV政策の加速が重なり、自動車産業の競争環境は想定を大きく超える速度で変化した。事後的に見れば、EV化の「弱いシグナル」は2010年代前半にすでに存在していた。問題は、それらのシグナルを体系的に集め、「ありうる未来のシナリオ」として検討する仕組みが十分に機能していなかったことにある。</p>
-
-    <p>不確実な時代に必要なのは、「正しい予測」ではなく「良い準備」である。フォーサイトは、未来を当てることを目指さない。代わりに、「もし世界がこうなったら、私たちはどう対応するか」という問いを組織的に探求し、どのような未来が来ても対応できる柔軟性と適応力を育むことを目指す。この発想の転換こそが、本書の出発点である。</p>
-
-    <!-- ===== Section 3 ===== -->
-    <h2>1-3. よくある誤解 ── 未来学は「予測」ではない</h2>
-
-    <p>「未来学」という言葉を聞いて、多くの人がまず思い浮かべるのは「未来予測」だろう。テレビや書籍で「2050年の世界はこうなる」と語る識者の姿。AI、ロボット、宇宙開発、人口動態、気候変動……具体的な数字や時期を挙げて未来を語る行為は、知的好奇心を刺激する。しかし、本書で扱う「未来学（Futures Studies）」は、そうした予測とは根本的に異なるものである。</p>
-
-    <p>ここで、未来学の分野でもっとも有名な「法則」を一つ紹介しよう。ハワイ大学マノア校で半世紀以上にわたって未来学を教え続けたジム・デイター（Jim Dator）は、「デイターの第一法則」として次のように述べている。</p>
-
-    <div class="chapter__epigraph">
-        <p>未来は「予測」できない。</p>
-        <cite>— ジム・デイター「デイターの第一法則」</cite>
+    <div class="callout callout-person">
+      <div class="callout-title">Pierre Wack（ピエール・ワック, 1922-1997）</div>
+      <p>フランス出身。ロイヤル・ダッチ・シェルのグループプランニング部門に所属し、1970年代にシナリオプランニングの手法を実践的に確立した。「直感的ロジックス」と呼ばれるシナリオ手法の開発者であり、経営者の「メンタルモデル」を変えることこそがシナリオの目的だと説いた。ワックの仕事は、後にピーター・シュワルツやキース・ヴァン・デル・ヘイデンらによって体系化され、世界中に広がった。</p>
     </div>
 
-    <p>未来学の創始者のひとりが、「未来は予測できない」と宣言している。これは逆説的に聞こえるかもしれないが、ここに未来学の本質がある。デイターが続けて述べる「第二法則」は、さらに重要である。</p>
+    <!-- Section 2: Why Futures Thinking Matters Now -->
+    <h2>なぜ今、未来を考えるのか</h2>
 
-    <div class="chapter__epigraph">
-        <p>「未来」について有用なことは何であれ、最初は「馬鹿げたもの」に見えるはずだ。</p>
-        <cite>— ジム・デイター「デイターの第二法則」</cite>
+    <p>二〇二〇年代の世界を生きる私たちにとって、「不確実性」はもはや特別な言葉ではない。地政学的な緊張の高まり、パンデミック、気候変動の加速、人工知能の急速な発展、金融市場の変動。私たちは、複数の危機が同時に進行し、互いに増幅し合う時代を生きている。国際政治学者のアダム・トゥーズはこの状態を「ポリクライシス（polycrisis）」と呼んだ。一つの危機が別の危機を誘発し、全体として解決がきわめて困難な状態に陥ること。これが現代の条件である。</p>
+
+    <p>二〇二〇年の新型コロナウイルスのパンデミックは、こうした不確実性の意味を私たちに身をもって教えた。ほんの数週間のあいだに、世界中の企業がサプライチェーンの寸断、需要の蒸発、働き方の根本的な転換に直面した。二〇二二年にはロシアのウクライナ侵攻がエネルギー安全保障を揺さぶり、同年の急激なインフレと利上げが金融市場を動揺させた。二〇二三年以降は生成AIの急速な普及が、あらゆる産業の前提を書き換えつつある。これらは互いに独立した事象ではなく、複雑に絡み合い、増幅し合っている。一つの危機への対応が、別の危機を深刻化させることすらある。</p>
+
+    <p>こうした状況に対して、企業は従来どのように対処してきただろうか。多くの場合、過去のデータを分析し、トレンドを外挿し、数年後の数値目標を設定する。いわゆる「中期経営計画」だ。これは安定した環境においては合理的な手法である。過去十年のトレンドが今後十年も続くなら、線形の予測は十分に機能する。だが、現実の世界はそうではない。一九七三年の石油危機がそうであったように、あるいは二〇二〇年のパンデミックがそうであったように、世界は時に非連続的な変化を起こす。こうした「構造的な変化」に直面したとき、過去の延長線上にしか未来を見られない組織は、変化の波に飲まれてしまう。</p>
+
+    <p>軍事用語から借りた「VUCA」（Volatility＝変動性、Uncertainty＝不確実性、Complexity＝複雑性、Ambiguity＝曖昧性）という概念は、一九九〇年代にアメリカ陸軍が冷戦後の世界を記述するために使い始めた。今日ではビジネスの文脈でも広く使われている。だが、VUCAという言葉は現状をラベリングするだけで、それにどう対処するかの指針を与えてはくれない。「世界は不確実だ」と宣言するだけでは、何も変わらないのだ。</p>
+
+    <p>変動性への対応として必要なのは、変化を前提とした柔軟な戦略である。不確実性への対応として必要なのは、「わからない」ということ自体を出発点にできる思考法だ。複雑性への対応として必要なのは、システム全体を俯瞰する視座である。曖昧性への対応として必要なのは、複数の解釈を同時に保持する認知的な能力だ。これらすべてを統合する方法論として、七十年以上にわたって発展してきたのが「未来学（Futures Studies）」であり、その実践的な形としての「フォーサイト（Foresight）」である。未来学とは、不確実性を排除するのではなく、不確実性と創造的に向き合い、そこから行動の選択肢を引き出すための体系的な知的伝統なのだ。</p>
+
+    <!-- Section 3: Common Misconceptions -->
+    <h2>未来学をめぐる三つの誤解</h2>
+
+    <p>未来学について語るとき、まず三つの根強い誤解を解いておく必要がある。</p>
+
+    <h3>誤解その一：未来学とは未来を予測することである</h3>
+
+    <p>これは最も広く流布している誤解であり、最も根本的なものだ。未来学の目的は、未来を当てることではない。ハワイ大学マノア校で半世紀にわたって未来学を教えてきたジム・デイターは、彼の名を冠した「デイターの第一法則」でこう述べている。「未来は予測できない。なぜなら、未来はまだ存在しないからだ」。未来は現在の延長線上に確定的に存在する何かではなく、人間の選択と行動によってつくられるものだ。未来学が扱うのは「唯一の未来」ではなく「複数の未来」、すなわち「あり得る未来の幅」である。</p>
+
+    <h3>誤解その二：未来学とは占いの一種である</h3>
+
+    <p>未来について語るという行為は、しばしば神秘的な連想を呼び起こす。水晶玉をのぞき込む占い師の像だ。「あなたの未来を教えます」と言われれば、誰もが懐疑的な目を向けるだろう。だが、未来学は体系的な方法論に基づく知的営為である。シナリオプランニング、デルファイ法、環境スキャニング、システムダイナミクス、因果階層分析（CLA）、バックキャスティングなど、七十年以上の蓄積を持つ手法群がある。本書の背景データベースには九十の異なる手法が収録されているが、そのどれもが「未来を言い当てる」ための道具ではない。それらは、私たちの思考の幅を広げ、見落としていた可能性に気づかせ、より堅牢な戦略を構築するための知的な道具立てである。</p>
+
+    <p>これらの手法は、大学で教えられ、政府機関で実践され、学術雑誌で議論されている。世界には未来学の修士課程・博士課程を持つ大学が複数あり、ハワイ大学マノア校、フィンランドのトゥルク大学やタンペレ大学、台湾の淡江大学などがその代表例だ。日本においても、科学技術振興機構（JST）の下にある科学技術・学術政策研究所（NISTEP）は、一九七一年から半世紀以上にわたってデルファイ法による科学技術予測調査を実施してきた。これは世界で最も長い歴史を持つ国家フォーサイト活動の一つである。</p>
+
+    <h3>誤解その三：未来学の目的は正しい未来を言い当てることである</h3>
+
+    <p>仮に未来学者が何らかの予測を述べたとして、それが「当たった」かどうかが評価基準になるべきだろうか。シェルのワックの例に立ち返ろう。ワックの功績は、石油危機を「予言した」ことではなく、シェルの経営陣が複数の未来に備えて思考できるようになったことだ。未来学の価値は、「正解率」ではなく、思考と判断と行動の質を高めることにある。</p>
+
+    <p>この点はいくら強調してもしすぎることはない。フォーサイトの実践者たちは、しばしばこう言う。「目的は未来を正しく予測することではなく、現在における意思決定をより良くすることだ」と。もう少し踏み込んで言えば、優れたフォーサイトとは、組織や社会が持っている暗黙の前提——「今後もこうであるはずだ」「この傾向は続くだろう」「こんなことは起こらない」——を可視化し、問い直す営みである。石油危機以前のシェルの経営陣は、「原油価格は安定している」という暗黙の前提の上に戦略を立てていた。ワックのシナリオが果たした役割は、その前提を意識の表層に引き上げ、「もしそれが崩れたら？」と問いかけたことだった。</p>
+
+    <div class="pull-quote">
+      未来学は、唯一正しい未来を当てる学問ではない。まだ存在しない未来の可能性を体系的に探索し、今ここでの判断をより良くするための知的営為である。
     </div>
 
-    <p>つまり、未来学が扱うのは「正確な予測」ではなく、「現在の常識では馬鹿げて見えるが、実は起こりうる可能性」なのである。この転換は決定的に重要だ。予測は「正しい未来を当てる」ことを目指すが、未来学は「複数のありうる未来を探索する」ことを目指す。予測が「答え」を求めるのに対し、未来学は「問い」を求める。</p>
+    <!-- Section 4: Forecasting vs Foresight -->
+    <h2>予測とフォーサイト — 二つの異なるアプローチ</h2>
 
-    <p>もう一つ、よくある誤解を解いておきたい。「未来学は楽観的な未来を描くものだ」あるいは逆に「未来学は危機を煽るものだ」という見方である。未来学は楽観でも悲観でもない。複数のありうる未来を <em>体系的に</em> 探索し、その中で「望ましい未来」に向けた行動を支援する学問である。未来学者の仕事は、バラ色の未来を描くことでも、ディストピアで恐怖を煽ることでもなく、<strong>可能性の空間を広げ、選択肢を見えるようにすること</strong>なのである。</p>
+    <p>未来に関するアプローチには、大きく二つの流れがある。「予測（Forecasting）」と「フォーサイト（Foresight）」だ。両者はしばしば混同されるが、その哲学も方法論も本質的に異なる。</p>
 
-    <p>さらに付け加えれば、「未来学は長期のことだけを扱う」という誤解もある。確かに、シナリオプランニングは10年から30年先の時間軸を扱うことが多い。しかし、未来学的な思考法 —— 仮定を問い直す、複数の可能性を探索する、弱いシグナルに注意を向ける —— は、3年先の事業計画から来月の意思決定まで、あらゆる時間軸で有効である。未来学の真の価値は、特定の時間軸にあるのではなく、<strong>「今ここで当たり前とされていること」を意識的に疑う思考の習慣</strong>にある。</p>
+    <p>予測は、過去のデータから未来を推定する。トレンドの外挿、統計モデル、確率計算。天気予報はその典型だ。十分なデータと適切なモデルがあれば、短期的な予測はかなりの精度で可能になる。企業の売上予測や在庫管理、人口推計なども、基本的には予測の手法に属する。予測の前提は、「過去のパターンが未来にも続く」という仮定であり、比較的安定した環境では有効に機能する。</p>
 
-    <p>未来学の創始者のひとりであるウェンデル・ベル（Wendell Bell）は、その主著『未来学の基礎（Foundations of Futures Studies）』（1997年）において、未来学の目的を9つに整理している。その中でもっとも根本的なのは、「現在の行動選択を改善するために、可能・蓋然・望ましい未来についての知識を生み出すこと」である。つまり、未来学の最終的な目的は「未来を知る」ことではなく、「現在の行動をより良くする」ことなのだ。この点を見失わないことが、未来学を実践する上でもっとも大切な態度である。</p>
+    <p>フォーサイトは、別の前提に立つ。未来は過去の延長ではなく、根本的に不確実で開かれているという前提だ。したがってフォーサイトは、一つの「最も可能性の高い未来」を推定するのではなく、「あり得る複数の未来」を体系的に探索する。シナリオプランニングはその代表的な手法だが、他にも環境スキャニング、デルファイ法、バックキャスティング、因果階層分析（CLA）など、多様な手法がある。これらの手法はそれぞれ異なる認識論的前提に立ち、異なる種類の問いに答える。</p>
 
-    <div class="info-box info-box--primary">
-        <div class="info-box__label">人物紹介</div>
-        <p class="info-box__title">ウェンデル・ベル（Wendell Bell, 1930-2019）</p>
-        <p>アメリカの社会学者。イェール大学教授として長年教鞭をとり、未来学の哲学的基盤を体系化した。主著『Foundations of Futures Studies』（全2巻、1997/2003年）は、未来学を学術的に正当化する決定的な著作として、世界中の大学院プログラムで必読書とされている。ベルは「未来学は科学たりうるか」という根本的な問いに取り組み、批判的実在論の立場から肯定的に答えた。</p>
+    <!-- Diagram 1: Forecasting vs Foresight -->
+    <figure>
+      <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px;">
+        <!-- Background -->
+        <rect width="700" height="350" fill="none"/>
+        <!-- Left: Forecasting -->
+        <rect x="20" y="20" width="310" height="310" rx="6" fill="#FAF7F3" stroke="#DDD5CB" stroke-width="1.5"/>
+        <text x="175" y="55" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="16" font-weight="700" fill="#7A4033">予測 (Forecasting)</text>
+        <line x1="60" y1="240" x2="290" y2="120" stroke="#9B5B4A" stroke-width="2.5" stroke-dasharray="8,4"/>
+        <line x1="60" y1="240" x2="290" y2="90" stroke="#DDD5CB" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <line x1="60" y1="240" x2="290" y2="150" stroke="#DDD5CB" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <circle cx="60" cy="240" r="5" fill="#7A4033"/>
+        <text x="56" y="270" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#5A5A5A">現在</text>
+        <text x="248" y="108" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#9B5B4A">推定値</text>
+        <text x="55" y="300" font-family="Noto Serif JP, serif" font-size="10.5" fill="#5A5A5A">過去のデータ → 一つの推定値</text>
+        <!-- Right: Foresight -->
+        <rect x="370" y="20" width="310" height="310" rx="6" fill="#FAF7F3" stroke="#DDD5CB" stroke-width="1.5"/>
+        <text x="525" y="55" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="16" font-weight="700" fill="#7A4033">フォーサイト (Foresight)</text>
+        <circle cx="410" cy="240" r="5" fill="#7A4033"/>
+        <!-- Multiple diverging paths -->
+        <path d="M410,240 Q500,200 640,100" stroke="#D4864D" stroke-width="2" fill="none"/>
+        <path d="M410,240 Q520,180 640,140" stroke="#5C7C3A" stroke-width="2" fill="none"/>
+        <path d="M410,240 Q530,210 640,180" stroke="#9B5B4A" stroke-width="2" fill="none"/>
+        <path d="M410,240 Q510,230 640,220" stroke="#8A8A8A" stroke-width="2" fill="none"/>
+        <circle cx="640" cy="100" r="4" fill="#D4864D"/>
+        <circle cx="640" cy="140" r="4" fill="#5C7C3A"/>
+        <circle cx="640" cy="180" r="4" fill="#9B5B4A"/>
+        <circle cx="640" cy="220" r="4" fill="#8A8A8A"/>
+        <text x="406" y="270" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#5A5A5A">現在</text>
+        <text x="644" y="98" font-family="Noto Sans JP, sans-serif" font-size="9.5" fill="#D4864D">可能な未来A</text>
+        <text x="644" y="138" font-family="Noto Sans JP, sans-serif" font-size="9.5" fill="#5C7C3A">可能な未来B</text>
+        <text x="644" y="178" font-family="Noto Sans JP, sans-serif" font-size="9.5" fill="#9B5B4A">可能な未来C</text>
+        <text x="644" y="218" font-family="Noto Sans JP, sans-serif" font-size="9.5" fill="#8A8A8A">可能な未来D</text>
+        <text x="405" y="300" font-family="Noto Serif JP, serif" font-size="10.5" fill="#5A5A5A">現在の認識 → 複数の未来の探索</text>
+      </svg>
+      <figcaption><span class="fig-number">図1-1</span>　予測（Forecasting）とフォーサイト（Foresight）の違い。予測は過去のデータから一つの推定値を導くのに対し、フォーサイトは複数の可能な未来を体系的に探索する。</figcaption>
+    </figure>
+
+    <p>ここで一つ重要な補足をしておきたい。フォーサイトは予測を否定するのではない。短期的・定量的な問題には予測が適しており、中長期的・構造的な問題にはフォーサイトが適している。来月の売上予測にシナリオプランニングを持ち出す必要はないし、二〇五〇年の社会像を統計的外挿だけで描こうとするのは無謀だ。予測とフォーサイトは対立するものではなく、補完的な関係にある。本書が主に扱うのはフォーサイトの領域だが、予測の手法やその認識論的基盤についても第三章と第六章で詳しく論じる。</p>
+
+    <p>もう一つ付け加えるべきは、フォーサイトの対象は「未来そのもの」ではなく「未来についての私たちの思考」だということだ。ワックがシェルの経営陣に対して行ったのは、未来を見せることではなく、未来について考えるための新しいフレームを提供することだった。「私たちは何を前提としているのか」「その前提が崩れたらどうなるのか」「私たちが見落としている可能性は何か」。こうした問いを組織の中に埋め込むこと。それがフォーサイトの実践であり、第五章で詳しく扱うシナリオプランニングの本質でもある。</p>
+
+    <!-- Section 5: Dator's First Law -->
+    <h2>デイターの第一法則 — 「未来は存在しない」</h2>
+
+    <p>未来学の認識論的基盤を理解するうえで、デイターの法則は避けて通れない。ジム・デイターはハワイ大学マノア校の政治学教授であり、同大学の未来学研究センター（Hawaii Research Center for Futures Studies）を半世紀にわたって率いてきた未来学の巨人である。彼は二つの「法則」を提示した。</p>
+
+    <p>第一法則は、すでに引用した通りだ。「未来は予測できない。なぜなら、未来はまだ存在しないからだ（The future cannot be predicted because the future does not exist）」。これは単なるレトリックではなく、深い哲学的含意を持つ。未来は、過去や現在のように「そこにある」ものではない。未来は、人間の想像力と行為によって生成される。したがって、未来を「発見する」ことはできない。私たちにできるのは、あり得る未来の可能性を「探索し」、望ましい未来を「構想し」、その実現に向けて「行動する」ことだけだ。</p>
+
+    <p>第二法則は、さらに挑発的だ。「未来について有用な考えは、最初は馬鹿げて見える（Any useful idea about the futures should appear to be ridiculous）」。一九九〇年代に「インターネットが小売業を根本的に変える」と言ったなら、多くの人は笑っただろう。二〇〇五年に「十年後、世界中の人が常にポケットに小さなコンピュータを入れて歩くようになる」と言ったなら、SF的な妄想だと思われただろう。だが、どちらも現実になった。デイターの第二法則が示しているのは、本当に新しい未来の可能性は、既存の枠組みでは理解できないということだ。現在の常識で「もっともらしい」と感じる未来像は、多くの場合、単に現在の延長にすぎない。本当に異なる未来は、私たちの現在の想像力の限界の向こう側にある。</p>
+
+    <p>未来学のオーストラリアの理論家ジョセフ・ボロスは、こうした「未来の複数性」を視覚化するために「フューチャーズ・コーン」という図を二〇〇三年の論文で提示した。この図は未来学においてもっとも広く引用されるダイアグラムの一つになっている。</p>
+
+    <!-- Diagram 2: Futures Cone -->
+    <figure>
+      <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="max-width: 600px;">
+        <!-- Cone shape -->
+        <defs>
+          <linearGradient id="cone-possible" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FAF7F3"/>
+            <stop offset="100%" stop-color="#E8E0D6"/>
+          </linearGradient>
+        </defs>
+        <!-- Possible (outermost) -->
+        <path d="M80,200 L620,40 L620,360 Z" fill="#F3EDE5" stroke="#DDD5CB" stroke-width="1"/>
+        <text x="590" y="358" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#8A8A8A" text-anchor="end">可能な未来 (Possible)</text>
+        <!-- Plausible -->
+        <path d="M80,200 L620,80 L620,320 Z" fill="#F0E6D8" stroke="#DDD5CB" stroke-width="1"/>
+        <text x="590" y="318" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#9B5B4A" text-anchor="end">もっともらしい未来 (Plausible)</text>
+        <!-- Probable -->
+        <path d="M80,200 L620,130 L620,270 Z" fill="#EDDCCB" stroke="#D4864D" stroke-width="1"/>
+        <text x="590" y="268" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#D4864D" text-anchor="end">蓋然性の高い未来 (Probable)</text>
+        <!-- Projected (narrowest) -->
+        <path d="M80,200 L620,170 L620,230 Z" fill="#E5CDB8" stroke="#7A4033" stroke-width="1.5"/>
+        <text x="590" y="228" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#7A4033" text-anchor="end">投影された未来 (Projected)</text>
+        <!-- Preferable (overlay arc) -->
+        <path d="M400,120 Q510,180 400,260" stroke="#5C7C3A" stroke-width="2.5" fill="none" stroke-dasharray="6,3"/>
+        <text x="520" y="195" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#5C7C3A">望ましい未来</text>
+        <text x="520" y="212" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#5C7C3A">(Preferable)</text>
+        <!-- Now point -->
+        <circle cx="80" cy="200" r="6" fill="#7A4033"/>
+        <text x="60" y="226" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#7A4033">現在</text>
+        <!-- Time arrow -->
+        <line x1="80" y1="380" x2="640" y2="380" stroke="#8A8A8A" stroke-width="1"/>
+        <polygon points="640,380 630,375 630,385" fill="#8A8A8A"/>
+        <text x="360" y="397" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#8A8A8A">時間 →</text>
+      </svg>
+      <figcaption><span class="fig-number">図1-2</span>　フューチャーズ・コーン（Voros, 2003に基づく）。現在を起点として、時間軸が伸びるにつれて可能な未来の幅が広がる。投影された未来（現状延長）、蓋然���の高い未来（起こりそうなこと）、もっともらしい未来（あり得ること）、可能な未来（想像しうること）の四領域と、そのいずれかの位置に「望ましい未来」が置かれる。</figcaption>
+    </figure>
+
+    <p>フューチャーズ・コーンが示しているのは、未来には複数の「層」があるということだ。現在の延長線上にある「投影された未来（Projected）」は最も狭い帯域だ。現在のトレンドがそのまま続くという前提に立つもので、多くの中期経営計画や人口推計が扱う領域はここにあたる。少し幅を広げると「蓋然性の高い未来（Probable）」がある。統計的に見て最も起こりそうな範囲だが、構造的な変化は考慮されない。さらに広げると「もっともらしい未来（Plausible）」がある。現在の科学的知見に基づいて「あり得る」と判断される範囲であり、シナリオプランニングが主に扱うのはこの領域だ。そして最も広い「可能な未来（Possible）」がある。物理法則に反しない限り、想像しうるすべての未来がここに含まれる。</p>
+
+    <p>ここに、価値に基づく選択としての「望ましい未来（Preferable）」が重ね合わされる。望ましい未来は、蓋然性の高い帯域にあるかもしれないし、もっともらしい帯域の端にあるかもしれない。重要なのは、「望ましさ」は客観的な確率��はなく、人間の価値判断に基づくものだと���うことだ。誰にとって望ましいのか、何を基準に望ましいと判断するのか。これは未来学の倫理的な問いであり、第十四章と第十五章で深く掘り下げるテーマである。未来学が扱うのは、この全体の幅 — 投影から可能、そして望ましい未来まで — の探索である。</p>
+
+    <!-- Section 6: Japan and Futures Thinking -->
+    <h2>日本と未来思考 — 独自の伝統と課題</h2>
+
+    <p>日本には、実は未来学の豊かな伝統がある。一九六八年、林雄二郎や加藤秀俊らの尽力により日本未来学会が設立された。これは世界的にも早い時期の制度化であり、ローマクラブの設立と同じ年にあたる。また、前述のNISTEP科学技術予測調査は一九七一年に第一回が実施され、以来約五年ごとに継続されている。二〇一九年に実施された第十二回調査では、七〇〇以上の科学技術トピックの実現時期について、数千人の専門家がデルファイ法により意見を集約した。これは世界で最も長い歴史を持つ国家的デルファイ調査であり、日本のフォーサイト能力の象徴と言える。</p>
+
+    <p>興味深いことに、林雄二郎は一九六七年に『情報化社会 ハードな社会からソフトな社会へ』を出版し、産業社会から情報社会への転換を論じた。これはアルビン・トフラーの『第三の波』（一九八〇年）やダニエル・ベルの『脱工業社会の到来』（一九七三年）に先立つ先駆的な業績である。一九七〇年の大阪万博「日本万国博覧会」は「人類の進歩と調和」をテーマに掲げ、まさに未来をめぐる社会的な想像力の実験場だった。当時の日本には、未来について大胆に構想する知的風土があったのだ。</p>
+
+    <p>しかし、日本の未来研究にはいくつかの構造的な課題もある。第一に、NISTEPの調査を含め、日本のフォーサイト活動は科学技術政策の領域に偏っている。社会、文化、ガバナンスといったより広い領域での体系的なフォーサイトは、まだ発展途上にある。第二に、企業レベルでのフォーサイト実践は、欧州企業と比べると体系化が遅れている。シェルやシーメンス、サムスンのような専門のフォーサイト部門やチーフ・フューチャーズ・オフィサー（最高未来責任者）を置く日本企業はごく少数だ。第三に、未来学の学術的教育が制度化されていない。ハワイ大学、タンペレ大学、台湾の淡江大学のように未来学の修士・博士課程を持つ大学は、日本にはまだ存在しない。こうした制度的な空白が、未来学という知的伝統が日本で十分に根を下ろすことを妨げてきた面がある。</p>
+
+    <p>だが、状況は変わりつつある。内閣府の「ムーンショット型研究開発制度」は、二〇五〇年を見据えた破壊的イノベーションを目指すものであり、バックキャスティング的な発想を取り入れている。経済産業省は産業構造審議会のもとで未来ビジョンの策定プロ��スにシナリオプランニングを活用している。文部科学省は「Society 5.0」の議論を通じて、科学技術と社会の共進化を描こうとしてきた。</p>
+
+    <p>民間の動きも活発化している。トヨタが静岡県裾野市に建設を進める「ウーブン・シティ」は、自動運転、AI、ロボティクス、エネルギーマネジメントなどの技術を住民の生活環境の中で実験するプロジェク���であり、一種の「生きたフューチャーズ・ラボ」と言える。日立製作所は「社会イノベーション事業」のビジョン策定にフォーサイト手法を取り入れてきた。ソニーやパナソニックといった企業はSFプロトタイピング — SFの想像力を使って未来の製品やサービスを構想する手法 — に取り組んでいる。NPO法人ミラツクも、フォーサイトの手法を社会実践に応用するプログラムを展開してきた。本書は、こうした日本の文脈におけるフォーサイト実践をさらに豊かにすることを目指している。</p>
+
+    <div class="callout callout-case">
+      <div class="callout-title">NISTEP科学技術予測調査の50年</div>
+      <p>科学技術・学術政策研究所（NISTEP）の科学技術予測調査は、1971年の第1回以来、50年以上にわたって継続されている世界最長の国家デルファイ調査である。約5年ごとに実施され、数千人の専門家が科学技術トピックの実現時期や社会的影響について意見を集約する。初期は純粋な技術予測が中心だったが、近年は社会課題との接続やシナリオ手法との組み合わせなど、方法論の進化も見られる。第12回調査（2019年）では、702の科学技術トピックを対象に、AI、量子技術、バイオテクノロジーなどの実現見通しが示された。</p>
     </div>
 
-    <!-- ===== Section 4 ===== -->
-    <h2>1-4. 予測とフォーサイトの違い</h2>
+    <!-- Section 7: Book Structure Preview -->
+    <h2>本書の見取り図</h2>
 
-    <p>本書を通じて理解していただきたいもっとも重要な区別の一つが、「予測（forecasting）」と「フォーサイト（foresight）」の違いである。この二つは日常語としてはほとんど同義に使われるが、未来学の文脈では明確に異なる概念である。</p>
+    <p>本書は五部二十章で構成されている。第I部「未来学への招待」（第一章〜第三章）では、本章に続いて未来学の八十年の歴史をたどり（第二章）、その認識論的基盤を検討する（第三章）。第II部「未来を探る手法」（第四章〜第九章）では、環境スキャニング、シナリオプランニング、デルファイ法、システム思考、因果階層分析（CLA）、デザインフィクションなど、主要な手法を一つずつ解説する。第III部「未来を考えるフレームワーク」（第十章〜第十三章）では、スリーホライズン、バックキャスティング、メガトレンド分析、デイターの四つの汎用的未来像といった、より包括的な枠組みを紹介する。</p>
 
-    <p>予測（forecasting）とは、過去のデータやトレンドに基づいて、未来の状態をできるだけ正確に推定しようとする営みである。天気予報、経済予測、人口推計、技術ロードマップなどがこれにあたる。予測は「もっとも起こりそうな未来（probable future）」を特定しようとする。この営み自体は有用であり、短中期の意思決定には不可欠である。しかし、予測には根本的な限界がある。それは、過去のパターンが将来も続くという仮定に依存していることだ。</p>
+    <p>第IV部「未来と社会」（第十四章〜第十七章）では、将来世代への責任、権力と公正、持続可能性、テクノロジーと人間性という、未来を考えるうえで避けて通れない社会的・倫理的テーマを論じる。第V部「実践する未来学」（第十八章〜第二十章）では、企業フォーサイト、政策フォーサイト、そして読者一人ひとりの「未来力」の育成について実践的に論じる。</p>
 
-    <p>フォーサイト（foresight）は、予測とは異なるアプローチをとる。フォーサイトは、「もっとも起こりそうな未来」だけでなく、「起こりうる複数の未来」を探索する。そして、それぞれの未来において何が起こりうるかを検討し、不確実性のなかでも堅牢な意思決定ができるよう支援する。フォーサイトの目的は「正しい予測」ではなく、「より良い準備」である。</p>
+    <!-- Diagram 3: Book Structure Map -->
+    <figure>
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width: 650px;">
+        <!-- Part boxes -->
+        <rect x="20" y="20" width="120" height="140" rx="4" fill="#7A4033" opacity="0.9"/>
+        <text x="80" y="52" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#F0A671">Part I</text>
+        <text x="80" y="72" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">未来学への</text>
+        <text x="80" y="90" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">招待</text>
+        <text x="80" y="116" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#F5C49E">Ch.1-3</text>
+        <text x="80" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#F5C49E">35,000字</text>
 
-    <!-- Diagram: Forecasting vs Foresight -->
-    <div class="diagram">
-        <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="予測とフォーサイトの比較図">
-            <!-- Background -->
-            <rect width="680" height="340" fill="none"/>
+        <rect x="160" y="20" width="120" height="140" rx="4" fill="#9B5B4A" opacity="0.9"/>
+        <text x="220" y="52" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#F0A671">Part II</text>
+        <text x="220" y="72" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">未来を探る</text>
+        <text x="220" y="90" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">手法</text>
+        <text x="220" y="116" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#F5C49E">Ch.4-9</text>
+        <text x="220" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#F5C49E">55,000字</text>
 
-            <!-- Left: Forecasting -->
-            <g transform="translate(20, 20)">
-                <rect x="0" y="0" width="300" height="300" rx="8" fill="#F8F5F0" stroke="#D4CBC0" stroke-width="1.5"/>
-                <text x="150" y="32" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="15" font-weight="700" fill="#8B6914">予測（Forecasting）</text>
+        <rect x="300" y="20" width="120" height="140" rx="4" fill="#D4864D" opacity="0.9"/>
+        <text x="360" y="52" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#FFFFFF">Part III</text>
+        <text x="360" y="72" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">フレーム</text>
+        <text x="360" y="90" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">ワーク</text>
+        <text x="360" y="116" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#FFFFFF">Ch.10-13</text>
+        <text x="360" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#FFFFFF">35,000字</text>
 
-                <!-- Arrow: single line from past to future -->
-                <line x1="40" y1="180" x2="260" y2="120" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
-                <polygon points="260,120 248,127 250,117" fill="#8B6914"/>
+        <rect x="440" y="20" width="120" height="140" rx="4" fill="#5C7C3A" opacity="0.9"/>
+        <text x="500" y="52" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#C8E6A0">Part IV</text>
+        <text x="500" y="72" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">未来と</text>
+        <text x="500" y="90" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">社会</text>
+        <text x="500" y="116" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#C8E6A0">Ch.14-17</text>
+        <text x="500" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#C8E6A0">35,000字</text>
 
-                <!-- Data points in the past -->
-                <circle cx="60" cy="190" r="4" fill="#8B6914"/>
-                <circle cx="90" cy="175" r="4" fill="#8B6914"/>
-                <circle cx="120" cy="180" r="4" fill="#8B6914"/>
-                <circle cx="150" cy="165" r="4" fill="#8B6914"/>
-                <circle cx="180" cy="155" r="4" fill="#8B6914"/>
+        <rect x="580" y="20" width="120" height="140" rx="4" fill="#2D2D2D" opacity="0.9"/>
+        <text x="640" y="52" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#F0A671">Part V</text>
+        <text x="640" y="72" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">実践する</text>
+        <text x="640" y="90" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">未来学</text>
+        <text x="640" y="116" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#B8AFA3">Ch.18-20</text>
+        <text x="640" y="132" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#B8AFA3">40,000字</text>
 
-                <!-- Dashed projection -->
-                <line x1="180" y1="155" x2="260" y2="120" stroke="#8B6914" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <!-- Flow arrows -->
+        <line x1="142" y1="90" x2="158" y2="90" stroke="#DDD5CB" stroke-width="2"/>
+        <line x1="282" y1="90" x2="298" y2="90" stroke="#DDD5CB" stroke-width="2"/>
+        <line x1="422" y1="90" x2="438" y2="90" stroke="#DDD5CB" stroke-width="2"/>
+        <line x1="562" y1="90" x2="578" y2="90" stroke="#DDD5CB" stroke-width="2"/>
 
-                <!-- Labels -->
-                <text x="60" y="230" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#666">過去のデータ</text>
-                <text x="220" y="105" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#666">予測値</text>
+        <!-- Bottom label -->
+        <text x="360" y="200" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="13" font-weight="700" fill="#7A4033">全20章・約200,000字</text>
+        <text x="360" y="222" text-anchor="middle" font-family="Noto Serif JP, serif" font-size="11" fill="#5A5A5A">基礎概念から実践まで、現代未来学を体系的に学ぶ</text>
 
-                <!-- Time axis -->
-                <line x1="30" y1="250" x2="270" y2="250" stroke="#999" stroke-width="1"/>
-                <text x="50" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">過去</text>
-                <text x="150" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="middle">現在</text>
-                <text x="250" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="end">未来</text>
+        <!-- Underlying theme bar -->
+        <rect x="20" y="250" width="680" height="40" rx="4" fill="#FAF7F3" stroke="#DDD5CB" stroke-width="1"/>
+        <text x="360" y="275" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="11" fill="#5A5A5A">データベース基盤: 326研究者 / 90手法 / 211概念 / 17学派 / 40論争 / 93教科書 / 38大学カリキュラム</text>
+      </svg>
+      <figcaption><span class="fig-number">図1-3</span>　本書の全体構成。五部二十章で、未来学の基礎概念（Part I）、手法（Part II）、フレームワーク（Part III）、社会的テーマ（Part IV）、実践（Part V）を体系的にカバーする。</figcaption>
+    </figure>
 
-                <text x="150" y="295" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">一つの「最も可能性の高い未来」</text>
-            </g>
+    <!-- Section 8: Closing -->
+    <h2>なぜこの本を、いま、あなたに</h2>
 
-            <!-- Right: Foresight -->
-            <g transform="translate(360, 20)">
-                <rect x="0" y="0" width="300" height="300" rx="8" fill="#F8F5F0" stroke="#5C7C3A" stroke-width="1.5"/>
-                <text x="150" y="32" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="15" font-weight="700" fill="#5C7C3A">フォーサイト（Foresight）</text>
+    <p>本書は、日本語で読める初の体系的な未来学入門書として企画された。未来学という分野は、英語圏では七十年以上の歴史を持ち、世界中の大学で教えられ、政府や企業で実践されている。しかし日本語圏では、その全体像を一冊で学べる書籍がほとんど存在しなかった。シナリオプランニングやシステム思考といった個別の手法に関する翻訳書はあるが、未来学という分野全体を俯瞰し、手法間の関係や認識論的基盤までを含めて解説する書籍は、驚くほど少ない。</p>
 
-                <!-- Multiple arrows fanning out -->
-                <line x1="80" y1="180" x2="260" y2="80" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-                <line x1="80" y1="180" x2="260" y2="130" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-                <line x1="80" y1="180" x2="260" y2="180" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-                <line x1="80" y1="180" x2="260" y2="230" stroke="#5C7C3A" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <p>本書の背景には、三二六人の研究者、九十の手法、二一一の概念、十七の学派、四十の論争を収録した未来学知識データベースがある。さらに、世界の九十三冊の未来学教科書と三十八の大学カリキュラムの分析に基づいて、何を、どの順序で、どの深さで扱うべきかを設計した。この本は、一人の著者の知見だけでなく、未来学というフィールド全体の知的蓄積に基づいている。</p>
 
-                <!-- Arrow heads -->
-                <polygon points="260,80 248,87 250,77" fill="#5C7C3A" opacity="0.8"/>
-                <polygon points="260,130 248,137 250,127" fill="#5C7C3A" opacity="0.8"/>
-                <polygon points="260,180 248,187 250,177" fill="#5C7C3A" opacity="0.8"/>
-                <polygon points="260,230 248,237 250,227" fill="#5C7C3A" opacity="0.8"/>
+    <p>読者として想定しているのは、企業で経営企画や新規事業開発に携わるビジネスパーソン、行政機関で政策立案に関わる公務員、NPOや社会的企業で社会課題に取り組む実践者、そして「未来」というテーマに知的関心を持つすべての人だ。未来学の専門的な予備知識は前提としない。だが、本書は「わかりやすさ」のために知的な厳密さを犠牲にすることはしない。各概念の理論的な骨格を正確に伝え、その上で具体的な事例と実践的な応用を示す。抽象的な理論だけでは足が地につかないし、事例の羅列だけでは応用力がつかない。理論と実践の往復運動こそが、本書のスタンスである。</p>
 
-                <!-- Current point -->
-                <circle cx="80" cy="180" r="6" fill="#5C7C3A"/>
+    <p>各章には、概念を視覚的に理解するためのダイアグラム、主要な研究者の紹介、日本やアジアの文脈における事例ボックス、さらに学びを深めるための文献案内を用意した。また、未来学というフィールドにおける重要な論争 — たとえば「予測 vs 探求」「定量的手法 vs 定性的手法」��専門家主導 vs 参加型」「成長 vs 脱成長」など — についても、一方の立場に与することなく、公正に紹介する。未来学とは、答えを提供する学問ではなく、より良い問いを立てるための学問だからだ。</p>
 
-                <!-- Labels for scenarios -->
-                <text x="268" y="82" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオA</text>
-                <text x="268" y="132" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオB</text>
-                <text x="268" y="182" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオC</text>
-                <text x="268" y="232" font-family="Noto Sans JP, sans-serif" font-size="9" fill="#666">シナリオD</text>
+    <p>ピエール・ワックがシェルの経営陣に問いかけたように、本書もまた読者に問いかけたい。「もし世界が根本的に変わるとしたら、あなたは何をするか？」。この問いに対する唯一の正解はない。だが、この問いに向き合うための知的な装備を、本書は提供する。未来を「読む力」を鍛えること。それが、不確実な時代を航海するための最も確かな羅針盤となる。</p>
 
-                <!-- Time axis -->
-                <line x1="30" y1="250" x2="270" y2="250" stroke="#999" stroke-width="1"/>
-                <text x="50" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">過去</text>
-                <text x="150" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="middle">現在</text>
-                <text x="250" y="270" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999" text-anchor="end">未来</text>
-
-                <text x="150" y="295" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-size="10" fill="#999">複数の「ありうる未来」を探索</text>
-            </g>
-        </svg>
-        <p class="diagram__caption">図1-1: 予測とフォーサイトの違い。予測は過去の延長線上に一つの未来を推定するが、フォーサイトは現在から複数のありうる未来を探索する。</p>
+    <!-- Chapter Summary -->
+    <div class="chapter-summary">
+      <h3>第一章のまとめ</h3>
+      <p>未来学（Futures Studies）とは、唯一の未来を予測する学問ではなく、複数の可能な未来を体系的に探索し、現在の意思決定をより良くするための知的営為である。ピエール・ワックのシナリオプランニングが示したように、フォーサイトの価値は「当てる」ことではなく「備える」ことにある。デイターの第一法則（「未来は予測できない。未来は存在しないからだ」）は、未来学の認識論的出発点を端的に表している。日本にはNISTEPのデルファイ調査に代表される五十年以上のフォーサイトの伝統があるが、社会全体での体系的な未来思考はまだ発展途上にある。本書は、未来学の全体像を日本語で初めて体系的に提示する試みである。</p>
     </div>
 
-    <p>この違いを一覧にすると、次のようになる。</p>
-
-    <table class="comparison-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>予測（Forecasting）</th>
-                <th>フォーサイト（Foresight）</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>目的</strong></td>
-                <td>もっとも起こりそうな未来を特定する</td>
-                <td>複数のありうる未来を探索し、準備する</td>
-            </tr>
-            <tr>
-                <td><strong>前提</strong></td>
-                <td>過去のパターンは概ね継続する</td>
-                <td>根本的な不連続が起こりうる</td>
-            </tr>
-            <tr>
-                <td><strong>アウトプット</strong></td>
-                <td>予測値（数値、トレンド線）</td>
-                <td>シナリオ（複数の物語）</td>
-            </tr>
-            <tr>
-                <td><strong>時間軸</strong></td>
-                <td>短〜中期（1〜5年）が得意</td>
-                <td>中〜長期（5〜30年以上）</td>
-            </tr>
-            <tr>
-                <td><strong>不確実性への態度</strong></td>
-                <td>縮小すべき誤差</td>
-                <td>探索すべき機会</td>
-            </tr>
-            <tr>
-                <td><strong>成功の基準</strong></td>
-                <td>予測の正確さ</td>
-                <td>意思決定の質の向上</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <p>重要なのは、予測とフォーサイトは「どちらが正しいか」という問題ではなく、「どちらが適切か」という問題であるということだ。安定した環境における短期的な意思決定には予測が有効であり、不確実性が高く長期的な視点が必要な場面にはフォーサイトが有効である。多くの場合、両者を組み合わせて使うことが最善である。本書は、予測を否定するのではなく、予測だけでは不十分な場面においてフォーサイトが何を提供できるかを示すものである。</p>
-
-    <h3>「未来を使う」という発想</h3>
-
-    <p>予測とフォーサイトの違いをさらに深く理解するために、もう一つの視点を紹介しよう。UNESCOのフューチャーズ・リテラシー・プログラムを主導するリエル・ミラー（Riel Miller）は、「未来は予測するものでも、計画するものでもなく、<strong>使うもの</strong>である」と主張する。ミラーの言う「未来を使う（using the future）」とは、未来についての想像や仮定を意識的に操作することで、現在の認知や行動を変容させるということである。</p>
-
-    <p>たとえば、ある企業が「10年後の世界で、自社の主力製品が存在しない」というシナリオを真剣に検討するとする。これは予測ではない。しかし、このシナリオを検討する過程で、経営陣は自社の存在意義について根本的な問い直しを迫られる。「なぜ顧客は我々の製品を買っているのか」「その顧客ニーズは、別の方法で満たされうるのではないか」「我々の本当の強みは、製品そのものではなく、何か別のところにあるのではないか」。こうした問いは、「10年後の予測」からは生まれにくい。しかし、「ありうる未来のシナリオ」を通じて、現在の前提を揺さぶることで、初めて浮かび上がってくる。</p>
-
-    <p>これが「未来を使う」ということの本質である。未来学の価値は、正確な未来像を提供することにあるのではない。未来という「レンズ」を通して現在を見つめ直し、今ここでの選択肢を広げ、意思決定の質を高めることにある。この発想の転換は、本書全体を貫く基本的な考え方である。</p>
-
-    <div class="info-box info-box--accent">
-        <div class="info-box__label">実践のヒント</div>
-        <p class="info-box__title">「もし〜だったら？」の習慣</p>
-        <p>フォーサイト的な思考の第一歩は、「もし〜だったら？（What if?）」という問いを習慣化することである。日常のニュースや業界の動向に接したとき、「もしこの変化が10倍の速度で進んだら、自社にどんな影響があるか？」「もしこのトレンドが逆転したら？」と問いかけてみよう。正確な答えを出す必要はない。大切なのは、自分の暗黙の前提に気づき、それを意識的に問い直す習慣を身につけることである。</p>
+    <!-- Further Reading -->
+    <div class="further-reading">
+      <h3>さらに学ぶために</h3>
+      <ul>
+        <li>Peter Schwartz (1991) <em>The Art of the Long View</em>（邦訳: 『シナリオ・プランニングの技法』）— シナリオプランニングの古典的入門書。ワックの仕事を体系化し、世界に広めた。</li>
+        <li>Wendell Bell (1997) <em>Foundations of Futures Studies</em> — 未来学の哲学的基盤を論じた二巻本の大著。学術的な定番テキスト。</li>
+        <li>Jim Dator (2019) <em>Jim Dator: A Noticer in Time</em> — デイター自身による未来学の回顧と展望。デイターの法則の背景が詳しく語られる。</li>
+        <li>林雄二郎 (1967) 『情報化社会 ハードな社会からソフトな社会へ』— 日本の未来学の先駆者による、「情報化社会」概念の提唱。</li>
+        <li>NISTEP (2019) 『第11回科学技術予測調査 S&Tフォーサイト2019』— 日本の国家フォーサイト活動の最新報告。</li>
+      </ul>
     </div>
 
-    <!-- ===== Section 5 ===== -->
-    <h2>1-5. 日本のビジネスにおける未来思考の系譜</h2>
-
-    <p>「未来学」は日本にとって縁遠い学問ではない。むしろ、日本は世界でもっとも早い時期から未来学に取り組んだ国の一つである。</p>
-
-    <p>1960年代、高度経済成長のただ中にあった日本では、「未来学ブーム」と呼ぶべき知的潮流が起こっていた。1967年、林雄二郎が『未来予測の方法論』を出版し、デルファイ法をはじめとする未来研究の方法論を日本に体系的に紹介した。翌1968年には加藤秀俊と林雄二郎の共著『未来学』が刊行され、一般読者にも未来学の世界が開かれた。同年、人類学者の梅棹忠夫は『情報産業論』のなかで「情報産業」という概念を提唱し、工業社会の次に来る情報社会の姿を先見的に描いた。この論考は、アルビン・トフラーの『第三の波』（1980年）に先立つこと12年のものである。</p>
-
-    <p>この知的潮流は、1970年の大阪万博（日本万国博覧会）で一つの頂点を迎える。「人類の進歩と調和」をテーマに掲げた大阪万博は、来場者数6,421万人を記録し、日本社会全体が未来に向けた高揚感に包まれた時代の象徴であった。万博の企画には、丹下健三、梅棹忠夫、小松左京らが参画し、建築、文化人類学、SF文学が交差する独自の未来構想が展開された。</p>
-
-    <p>しかし、日本の未来学は1970年代以降、急速に衰退する。二度の石油危機、バブル崩壊、「失われた30年」を経る中で、日本社会は未来に対する楽観を失い、未来学への関心も薄れていった。一方で、文部科学省のNISTEP（科学技術・学術政策研究所）は1971年から継続的に大規模なデルファイ調査を実施しており、2019年には第11回調査を完了している。約700名の専門家が約700テーマについて回答するこの調査は、世界最大規模のデルファイ・プロジェクトの一つであり、50年以上にわたる継続実施は世界的にも稀な事例である。</p>
-
-    <p>近年、日本でも未来学への関心が再び高まりつつある。背景には、気候変動、人口減少、AI革命といった長期的な構造変化への対応の必要性がある。高知工科大学の西條辰義教授が提唱する「フューチャー・デザイン」は、将来世代の利益を現在の意思決定に組み込む制度設計として世界的な注目を集めている。岩手県矢巾町では、町民が「仮想将来世代」として未来の住民の立場から政策を議論する実験が行われ、Nature誌にも取り上げられた。これは日本発のオリジナルな未来学の実践であり、世界の未来学コミュニティからも高く評価されている。</p>
-
-    <p>また、企業の世界でも変化が起きている。日立製作所はフォーサイト部門を設置し、組織的な未来思考の実践に取り組んでいる。楠瀬信太郎の『シナリオ・シンキング』（2021年）は、日本企業の文脈でフォーサイトを再解釈した実践書として注目されている。経済産業省の「2050年の産業構造審議会」、内閣府の「ムーンショット型研究開発制度」など、政策レベルでも長期的な未来思考への関心は高まっている。</p>
-
-    <p>しかし、率直に言って、日本の未来学は世界の水準から大きく遅れている。英語圏では、ハワイ大学マノア校（1975年設立）やヒューストン大学（同年設立）に未来学の大学院プログラムが50年近く継続して存在し、フィンランド、ドイツ、台湾、南アフリカ、コロンビアにも専門課程がある。しかし、日本にはフューチャーズ・スタディーズの専門大学院プログラムは存在せず、体系的な入門テキストも事実上存在しない。本書は、その空白を埋めることを目指している。</p>
-
-    <p>興味深いのは、日本の伝統文化には未来思考の萌芽とも言える知的伝統が存在することである。「三方よし」の近江商人の思想は、「売り手よし、買い手よし、世間よし」という言葉に凝縮されるが、これは短期的な利益ではなく、長期的かつ社会的な価値を重視する経営哲学である。また、伊勢神宮の式年遷宮（20年ごとに社殿を建て替える営み）は、1300年以上にわたって技術と知恵を「未来に伝える」仕組みとして機能してきた。これらは厳密な意味での「未来学」ではないが、長期的な時間軸で物事を考え、将来世代への責任を自覚する文化的基盤は、日本社会に根付いている。</p>
-
-    <p>日本が世界の未来学に貢献できる領域は確実に存在する。西條辰義のフューチャー・デザインは、その最も顕著な例である。加えて、日本のものづくり企業が持つ「長期的な技術開発」の姿勢、地方自治体の「総合計画」策定の文化、大学発の科学技術予測の蓄積など、フォーサイトの素地は豊富にある。これらの資産を、現代の未来学の体系的な手法と結びつけること。それが、日本における未来学の「再発見」の核心である。</p>
-
-    <div class="info-box info-box--accent">
-        <div class="info-box__label">事例</div>
-        <p class="info-box__title">岩手県矢巾町のフューチャー・デザイン実験</p>
-        <p>岩手県矢巾町では、2015年から西條辰義教授の「フューチャー・デザイン」の手法を用いた社会実験が行われている。町の水道料金の改定について議論する際、参加者の半数が「仮想将来世代」の役割を担い、2060年の矢巾町の住民として発言する。興味深いことに、仮想将来世代の役割を担った参加者は、そうでない参加者と比べて、長期的な持続可能性を重視する判断をする傾向が顕著に見られた。この実験は、人間が適切な「立場」を与えられれば、将来世代の利益を考慮する能力を発揮できることを示している。</p>
-    </div>
-
-    <!-- ===== Section 6 ===== -->
-    <h2>1-6. 本書で学べること</h2>
-
-    <p>本書は、未来学（Futures Studies）の世界への招待状である。日本のビジネスパーソンと社会実践者のために、世界の未来学の知的遺産を体系的に、かつ実践的に紹介することを目指している。</p>
-
-    <p>本書は5部20章で構成されている。</p>
-
-    <p><strong>Part I「未来学とは何か」</strong>（第1-3章）では、本章で述べた基本的な問題意識を出発点に、未来学の80年の歴史と、世界の17の知的学派を概観する。未来学は一枚岩の学問ではなく、軍事的起源を持つ計量的伝統から、ポストコロニアルな批判的伝統まで、実に多様な知的系譜の集合体である。その全体像を俯瞰することが、本書の旅の出発点となる。</p>
-
-    <p><strong>Part II「未来学の認識論」</strong>（第4-6章）では、「まだ存在しないもの」をどのように知りうるのかという哲学的問いに取り組む。フューチャーズ・コーン（可能・蓋然・望ましい未来の円錐モデル）やデイターの4つの代替未来原型など、未来を構造的に理解するためのフレームワークを学ぶ。また、不確実性そのものを分類・理解するための枠組みを紹介し、「わからないこと」に対する知的な態度を養う。</p>
-
-    <p><strong>Part III「未来学の手法」</strong>（第7-13章）は、本書の最も実践的なパートである。環境スキャニング（弱いシグナルの検出）、シナリオプランニング（複数の未来の物語を描く）、デルファイ法（専門家の知見を集約する）、因果階層分析（CLA: 問題の深層構造を掘り下げる）、スリーホライズン（変革の3つの地平）、デザインフューチャーズ（未来を体験可能にする）、システム思考（複雑系を理解する）という7つの主要手法を、それぞれ一章ずつ丁寧に解説する。</p>
-
-    <p><strong>Part IV「未来学の倫理と実践」</strong>（第14-17章）では、未来学が提起する倫理的問いと、実際の組織・社会での実践を論じる。将来世代への責任、企業フォーサイト、政府フォーサイト、そして参加型未来（市民が未来を共に描くプロセス）を取り上げる。とりわけ、日本発のフューチャー・デザインの理論と実践に一章を割き、日本が世界に貢献できる未来学の領域を示す。</p>
-
-    <p><strong>Part V「未来学の最前線」</strong>（第18-20章）では、AIと未来学の関係、脱植民地的未来と多元的世界、そしてフューチャーズ・リテラシー（未来を「使う」力）という三つの最前線を探求する。未来学は完成した学問ではなく、今まさに進化の途上にある。その最先端の議論に触れることで、読者自身が未来学の未来を構想する力を得ることを目指す。</p>
-
-    <p>本書を読み終えたとき、読者は未来学の知的伝統を概観し、主要な手法を理解し、自身の仕事や活動に未来思考を応用するための基盤を得ているだろう。しかし、もっとも大切なことは知識の習得ではない。本書が目指すのは、読者の「未来との付き合い方」を変えることである。</p>
-
-    <p>未来は予測するものではない。未来は、複数のありうる可能性として探求し、その中から望ましいものを選び取り、今日の行動によって創造していくものである。その営みを支える知的技法の体系が、未来学である。</p>
-
-    <p>最後に、オランダの社会学者フレッド・ポラック（Fred Polak）が1950年代に提示した、もっとも深遠な洞察を紹介しておきたい。ポラックは、世界の文明の興亡を研究した結果、ある法則を発見した。<strong>ポジティブで能動的な「未来のイメージ」を持つ社会は繁栄し、それを失った社会は衰退する</strong>。これは単なる楽観主義の勧めではない。ポラックが言う「未来のイメージ」とは、バラ色の予想ではなく、「未来は変えうるものであり、私たちの行動が未来を形作る」という信念のことである。</p>
-
-    <p>21世紀の日本社会は、まさにこの「未来のイメージ」の危機に直面しているのかもしれない。少子高齢化、経済の停滞、若者の将来不安……こうした課題に直面するなかで、「未来は暗い」という漠然とした感覚が広がっている。しかし、未来学が教えてくれるのは、未来は一つではないということだ。暗い未来が一つのシナリオであるならば、明るい未来もまた一つのシナリオである。そして、どのシナリオが実現するかは、今日の私たちの選択にかかっている。</p>
-
-    <p>さあ、航海を始めよう。</p>
-
-    <!-- ===== References ===== -->
-    <div class="chapter__references">
-        <h2>参考文献・さらに学ぶための読書案内</h2>
-        <ul>
-            <li>Schwartz, Peter (1991) <em>The Art of the Long View: Planning for the Future in an Uncertain World</em>. Currency Doubleday. [邦訳：『シナリオ・プランニング』東洋経済新報社]</li>
-            <li>Bell, Wendell (1997) <em>Foundations of Futures Studies, Vol. 1: Human Science for a New Era</em>. Transaction Publishers.</li>
-            <li>Slaughter, Richard (1996) <em>The Foresight Principle: Cultural Recovery in the 21st Century</em>. Praeger.</li>
-            <li>Wack, Pierre (1985) "Scenarios: Uncharted Waters Ahead." <em>Harvard Business Review</em>, Sept-Oct 1985.</li>
-            <li>Dator, Jim (2019) <em>Jim Dator: A Noticer in Time</em>. Springer.</li>
-            <li>Gidley, Jennifer (2017) <em>The Future: A Very Short Introduction</em>. Oxford University Press.</li>
-            <li>西條辰義 編 (2015) 『フューチャー・デザイン：七世代先を見据えた社会』勁草書房.</li>
-            <li>林雄二郎 (1967) 『未来予測の方法論』日本経済新聞社.</li>
-            <li>梅棹忠夫 (1968) 「情報産業論」（『放送朝日』掲載）</li>
-            <li>楠瀬信太郎 (2021) 『シナリオ・シンキング：不確実な未来への「構え」をデザインする』ダイヤモンド社.</li>
-        </ul>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="chapter__nav">
-        <a href="../index.html">目次に戻る</a>
-        <a href="ch02.html">次章: 未来学の80年 &rarr;</a>
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav">
+      <a href="../index.html">目次へ戻る</a>
+      <a href="ch02.html">第2章 →</a>
     </nav>
 
-</article>
+  </article>
 
-<!-- Footer -->
-<footer class="site-footer">
-    &copy; NPO法人ミラツク（MIRA TUKU）. 未来を拓く力 — フューチャーズ・スタディーズ入門
-</footer>
-
-<!-- Theme Toggle Script -->
-<script>
+  <script>
     function toggleTheme() {
-        const html = document.documentElement;
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+      const html = document.documentElement;
+      const btn = document.getElementById('theme-toggle-btn');
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = 'Dark';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = 'Light';
+      }
+      localStorage.setItem('theme', html.getAttribute('data-theme'));
     }
-
-    // Restore saved theme
     (function() {
-        const saved = localStorage.getItem('theme');
-        if (saved) {
-            document.documentElement.setAttribute('data-theme', saved);
-        }
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.addEventListener('DOMContentLoaded', function() {
+          var btn = document.getElementById('theme-toggle-btn');
+          if (btn) btn.textContent = 'Light';
+        });
+      }
     })();
-</script>
+  </script>
 
 </body>
 </html>
